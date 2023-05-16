@@ -2,6 +2,7 @@
 #define SPELL_H
 
 #include <QObject>
+#include <QDateTime>
 
 class Spell : public QObject
 {
@@ -17,6 +18,9 @@ public:
 
     quint8 cooldawn() const;
     void setCooldawn(const quint8 &cooldawn);
+
+    quint64 ID() const;
+    void setID(const quint64 &ID);
 
 private:
     quint64 _ID;

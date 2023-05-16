@@ -4,26 +4,14 @@
 #include <QObject>
 #include <QPicture>
 #include <QPixmap>
+#include <QVector>
+#include <QDateTime>
+
 
 #include "objects/spell.h"
+#include "common.h"
 
-enum PERSON_TYPE
-{
-    PT_UNDEFINED    = 0,
-    PT_USAL_ENEMY   = 1,
-    PT_PLAYER       = 2,
-    PT_BOSS_ENEMY   = 3,
-    PT_NEUTRAL      = 4
-};
 
-enum PERSON_CHARACTERISTICS
-{
-    PC_UNDEFINED,
-    PC_STRENGTH,
-    PC_AGILITY,
-    PC_INTELLIGENCE,
-    PC_CHARISMA
-};
 
 
 class Person : public QObject
@@ -50,7 +38,7 @@ public:
     QPixmap icon() const;
     void setIcon(const QPixmap &icon);
 
-    int ID() const;
+    quint64 ID() const;
     void setID(int ID);
 
     QString name() const;
@@ -68,16 +56,26 @@ public:
     PERSON_CHARACTERISTICS mainChars() const;
     void setMainChars(const PERSON_CHARACTERISTICS &mainChars);
 
-    QVector<Spell> getSpells() const;
-    void setSpells(const QVector<Spell> &value);
+    QVector<Spell *> getSpells() ;
+    void setSpells(QVector<Spell *> value);
+
+    QString getPathToIcon() const;
+    void setPathToIcon(const QString &pathToIcon);
+
+    qint16 strength() const;
+    void setStrength(const qint16 &strength);
+
+    qint16 agility() const;
+    void setAgility(const qint16 &agility);
 
 private:
-    int _ID = 0;
+    quint64 _ID = 0;
 
     // COMMON
     QString _name;
     QString _personClass;
     QPixmap _icon;
+    QString _pathToIcon;
     PERSON_TYPE _type = PT_UNDEFINED;
     // ***
 
@@ -96,7 +94,7 @@ private:
     PERSON_CHARACTERISTICS  _mainChars  = PC_UNDEFINED;
     // ***
 
-    QVector <Spell> spells;
+    QVector <Spell *> _spells;
 
 signals:
 

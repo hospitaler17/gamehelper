@@ -2,7 +2,7 @@
 
 Spell::Spell(QObject *parent) : QObject(parent)
 {
-
+    _ID = QDateTime::currentDateTime().toTime_t();
 }
 
 QString Spell::name() const
@@ -33,4 +33,14 @@ quint8 Spell::cooldawn() const
 void Spell::setCooldawn(const quint8 &cooldawn)
 {
     _cooldawn = cooldawn;
+}
+
+quint64 Spell::ID() const
+{
+    return _ID;
+}
+
+void Spell::setID(const quint64 &ID)
+{
+    _ID = ID;
 }

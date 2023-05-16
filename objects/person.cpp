@@ -2,7 +2,7 @@
 
 Person::Person(QObject *parent) : QObject(parent)
 {
-
+    _ID = QDateTime::currentDateTime().toTime_t();
 }
 
 qint16 Person::damage() const
@@ -66,7 +66,7 @@ void Person::setIcon(const QPixmap &icon)
     _icon = icon;
 }
 
-int Person::ID() const
+quint64 Person::ID() const
 {
     return _ID;
 }
@@ -126,12 +126,42 @@ void Person::setMainChars(const PERSON_CHARACTERISTICS &mainChars)
     _mainChars = mainChars;
 }
 
-QVector<Spell> Person::getSpells() const
+QVector<Spell*> Person::getSpells()
 {
-    return spells;
+    return _spells;
 }
 
-void Person::setSpells(const QVector<Spell> &value)
+void Person::setSpells(QVector<Spell*> value)
 {
-    spells = value;
+//    _spells = value;
+}
+
+QString Person::getPathToIcon() const
+{
+    return _pathToIcon;
+}
+
+void Person::setPathToIcon(const QString &pathToIcon)
+{
+    _pathToIcon = pathToIcon;
+}
+
+qint16 Person::strength() const
+{
+    return _strength;
+}
+
+void Person::setStrength(const qint16 &strength)
+{
+    _strength = strength;
+}
+
+qint16 Person::agility() const
+{
+    return _agility;
+}
+
+void Person::setAgility(const qint16 &agility)
+{
+    _agility = agility;
 }

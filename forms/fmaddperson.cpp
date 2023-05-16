@@ -6,6 +6,7 @@ FmAddPerson::FmAddPerson(QWidget *parent) :
     ui(new Ui::FmAddPerson)
 {
     ui->setupUi(this);
+
 }
 
 FmAddPerson::~FmAddPerson()

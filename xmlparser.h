@@ -2,6 +2,11 @@
 #define XMLPARSER_H
 
 #include <QtXml>
+#include <QXmlStreamReader>
+#include <QXmlStreamWriter>
+#include <QXmlStreamAttribute>
+#include <QFile>
+#include <QMessageBox>
 
 #include "common.h"
 #include "objects/person.h"
@@ -13,14 +18,16 @@ class XMLParser : public QObject
 {
     Q_OBJECT
 public:
-    explicit XMLParser(OBJECT_XML_TYPE type, QObject *parent = nullptr);
+    explicit XMLParser(QObject *parent = nullptr);
+
+    void readXmlFile(Person *person, QString filename);
+    void writeXmlFile(Person *person, QString filename);
 
 private:
     OBJECT_XML_TYPE _type;
 signals:
 
 public slots:
-    void openFile(QString filename);
 
 };
 
