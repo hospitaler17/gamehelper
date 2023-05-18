@@ -4,18 +4,16 @@
 #include <QObject>
 #include <QDateTime>
 
+#include "baseobject.h"
 
-class Battle : public QObject
+
+class Battle : public BaseObject
 {
     Q_OBJECT
 public:
-    explicit Battle(QObject *parent = nullptr);
-
-    quint64 ID() const;
-    void setID(const quint64 &ID);
+    explicit Battle(BaseObject *parent = nullptr);
 
 private:
-    quint64 _ID;
 signals:
 
 public slots:

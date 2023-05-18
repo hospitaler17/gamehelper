@@ -4,17 +4,18 @@
 #include <QObject>
 #include <QDateTime>
 
-class Map : public QObject
+#include "objects/baseobject.h"
+
+class Map : public BaseObject
 {
     Q_OBJECT
 public:
-    explicit Map(QObject *parent = 0);
+    explicit Map(BaseObject *parent = 0);
 
-    quint64 ID() const;
-    void setID(const quint64 &ID);
+
 
 private:
-    quint64 _ID;
+
 //    QRect mapSquere;
 
 signals:

@@ -1,19 +1,11 @@
 #include "spell.h"
 
-Spell::Spell(QObject *parent) : QObject(parent)
+Spell::Spell(BaseObject *parent) : BaseObject(parent)
 {
-    _ID = QDateTime::currentDateTime().toTime_t();
+    setObjectType(OXT_SPELL);
 }
 
-QString Spell::name() const
-{
-    return _name;
-}
 
-void Spell::setName(const QString &name)
-{
-    _name = name;
-}
 
 QString Spell::description() const
 {
@@ -33,14 +25,4 @@ quint8 Spell::cooldawn() const
 void Spell::setCooldawn(const quint8 &cooldawn)
 {
     _cooldawn = cooldawn;
-}
-
-quint64 Spell::ID() const
-{
-    return _ID;
-}
-
-void Spell::setID(const quint64 &ID)
-{
-    _ID = ID;
 }

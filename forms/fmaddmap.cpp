@@ -1,8 +1,8 @@
 #include "fmaddmap.h"
 #include "ui_fmaddmap.h"
 
-FmAddMap::FmAddMap(QWidget *parent) :
-    QWidget(parent),
+FmAddMap::FmAddMap(BaseForm *parent) :
+    BaseForm(parent),
     ui(new Ui::FmAddMap)
 {
     ui->setupUi(this);

@@ -7,18 +7,18 @@
 #include <QVector>
 #include <QDateTime>
 
-
+#include "objects/baseobject.h"
 #include "objects/spell.h"
 #include "common.h"
 
 
 
 
-class Person : public QObject
+class Person : public BaseObject
 {
     Q_OBJECT
 public:
-    explicit Person(QObject *parent = nullptr);
+    explicit Person(BaseObject *parent = nullptr);
 
     qint16 damage() const;
     void setDamage(const qint16 &damage);
@@ -37,12 +37,6 @@ public:
 
     QPixmap icon() const;
     void setIcon(const QPixmap &icon);
-
-    quint64 ID() const;
-    void setID(int ID);
-
-    QString name() const;
-    void setName(const QString &name);
 
     QString personClass() const;
     void setPersonClass(const QString &personClass);
@@ -69,10 +63,8 @@ public:
     void setAgility(const qint16 &agility);
 
 private:
-    quint64 _ID = 0;
 
     // COMMON
-    QString _name;
     QString _personClass;
     QPixmap _icon;
     QString _pathToIcon;

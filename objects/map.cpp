@@ -1,16 +1,8 @@
 #include "map.h"
 
-Map::Map(QObject *parent) : QObject(parent)
+Map::Map(BaseObject *parent)
+    : BaseObject(parent)
 {
-    _ID = QDateTime::currentDateTime().toTime_t();
+    setObjectType(OXT_MAP);
 }
 
-quint64 Map::ID() const
-{
-    return _ID;
-}
-
-void Map::setID(const quint64 &ID)
-{
-    _ID = ID;
-}

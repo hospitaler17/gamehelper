@@ -2,17 +2,19 @@
 #define FMADDBATTLE_H
 
 #include <QWidget>
+#include "forms/baseform.h"
+
 
 namespace Ui {
 class FmAddBattle;
 }
 
-class FmAddBattle : public QWidget
+class FmAddBattle : public BaseForm
 {
     Q_OBJECT
 
 public:
-    explicit FmAddBattle(QWidget *parent = 0);
+    explicit FmAddBattle(BaseForm *parent = 0);
     ~FmAddBattle();
 
 private:

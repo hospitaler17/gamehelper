@@ -4,14 +4,13 @@
 #include <QObject>
 #include <QDateTime>
 
-class Spell : public QObject
+#include "objects/baseobject.h"
+
+class Spell : public BaseObject
 {
     Q_OBJECT
 public:
-    explicit Spell(QObject *parent = 0);
-
-    QString name() const;
-    void setName(const QString &name);
+    explicit Spell(BaseObject *parent = 0);
 
     QString description() const;
     void setDescription(const QString &description);
@@ -19,13 +18,8 @@ public:
     quint8 cooldawn() const;
     void setCooldawn(const quint8 &cooldawn);
 
-    quint64 ID() const;
-    void setID(const quint64 &ID);
-
 private:
-    quint64 _ID;
 
-    QString _name;
     QString _description;
     quint8  _cooldawn;
 signals:

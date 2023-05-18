@@ -18,8 +18,8 @@ enum PERSON_TYPE
 {
     PT_UNDEFINED    = -1,
     PT_USUAL_ENEMY  = 0,
-    PT_PLAYER       = 1,
-    PT_BOSS_ENEMY   = 2,
+    PT_BOSS_ENEMY   = 1,
+    PT_PLAYER       = 2,
     PT_NEUTRAL      = 3
 };
 

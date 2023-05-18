@@ -2,17 +2,18 @@
 #define FMADDMAP_H
 
 #include <QWidget>
+#include "forms/baseform.h"
 
 namespace Ui {
 class FmAddMap;
 }
 
-class FmAddMap : public QWidget
+class FmAddMap : public BaseForm
 {
     Q_OBJECT
 
 public:
-    explicit FmAddMap(QWidget *parent = 0);
+    explicit FmAddMap(BaseForm *parent = 0);
     ~FmAddMap();
 
 private:

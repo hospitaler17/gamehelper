@@ -1,8 +1,8 @@
 #include "fmaddbattle.h"
 #include "ui_fmaddbattle.h"
 
-FmAddBattle::FmAddBattle(QWidget *parent) :
-    QWidget(parent),
+FmAddBattle::FmAddBattle(BaseForm *parent) :
+    BaseForm(parent),
     ui(new Ui::FmAddBattle)
 {
     ui->setupUi(this);

@@ -1,8 +1,9 @@
 #include "person.h"
 
-Person::Person(QObject *parent) : QObject(parent)
+Person::Person(BaseObject *parent)
+    : BaseObject(parent)
 {
-    _ID = QDateTime::currentDateTime().toTime_t();
+    setObjectType(OXT_PERSON);
 }
 
 qint16 Person::damage() const
@@ -64,26 +65,6 @@ QPixmap Person::icon() const
 void Person::setIcon(const QPixmap &icon)
 {
     _icon = icon;
-}
-
-quint64 Person::ID() const
-{
-    return _ID;
-}
-
-void Person::setID(int ID)
-{
-    _ID = ID;
-}
-
-QString Person::name() const
-{
-    return _name;
-}
-
-void Person::setName(const QString &name)
-{
-    _name = name;
 }
 
 QString Person::personClass() const

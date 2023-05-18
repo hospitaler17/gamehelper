@@ -38,7 +38,9 @@ SOURCES += \
     forms/fmaddspells.cpp \
     forms/fmaddmap.cpp \
     objects/map.cpp \
-    objects/spell.cpp
+    objects/spell.cpp \
+    objects/baseobject.cpp \
+    forms/baseform.cpp
 
 HEADERS += \
     objects/person.h \
@@ -52,7 +54,9 @@ HEADERS += \
     forms/fmaddspells.h \
     forms/fmaddmap.h \
     objects/map.h \
-    objects/spell.h
+    objects/spell.h \
+    objects/baseobject.h \
+    forms/baseform.h
 
 FORMS += \
     forms/fmaddperson.ui \
