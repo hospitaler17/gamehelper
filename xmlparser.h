@@ -22,9 +22,17 @@ public:
 
     void readXmlFile(Person *person, QString filename);
     void writeXmlFile(Person *person, QString filename);
+    void writeXmlFile(Spell *spell, QString filename);
+
+    QDir savePath() const;
+    void setSavePath(const QDir &savePath);
 
 private:
     OBJECT_XML_TYPE _type;
+
+    QDir _savePath;
+
+    QString makeFullPathToFile(QString fn);
 signals:
 
 public slots:

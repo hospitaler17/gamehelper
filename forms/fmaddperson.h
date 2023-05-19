@@ -3,10 +3,13 @@
 
 #include <QWidget>
 
+
 #include "forms/baseform.h"
 #include "forms/fmaddspells.h"
 #include "objects/person.h"
 #include "objects/spell.h"
+
+#include "xmlparser.h"
 
 namespace Ui {
 class FmAddPerson;
@@ -23,6 +26,8 @@ public:
 protected:
     virtual void initParams();
 
+private:
+    Person * person;
 private slots:
 
     void on_pb_spells_clicked();

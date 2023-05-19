@@ -6,6 +6,7 @@ FmAddPerson::FmAddPerson(QWidget *parent) :
     ui(new Ui::FmAddPerson)
 {
     ui->setupUi(this);
+
     initParams();
 }
 
@@ -24,11 +25,12 @@ void FmAddPerson::initParams()
     {
         ui->cbox_type->insertItem(i, Common::getPersonTypeDescription((PERSON_TYPE) i));
     }
+    person = new Person();
 }
 
 void FmAddPerson::on_pb_spells_clicked()
 {
-    FmAddSpells * fmAddSpells = new FmAddSpells();
+    FmAddSpells * fmAddSpells = new FmAddSpells(person);
     //TODO: передать модель со способностями
     fmAddSpells->setWindowModality(Qt::ApplicationModal);
     fmAddSpells->show();
@@ -36,8 +38,6 @@ void FmAddPerson::on_pb_spells_clicked()
 
 void FmAddPerson::on_pb_save_clicked()
 {
-    Person * person = new Person();
-
     // main
     person->setName(ui->le_name->text());
     person->setPersonClass(ui->le_class->text());
@@ -55,5 +55,10 @@ void FmAddPerson::on_pb_save_clicked()
     person->setCharisma(ui->sb_charisma->value());
     person->setMainChars((PERSON_CHARACTERISTICS) ui->cbox_main_characteristic->currentIndex());
 
-    //TODO: добавить способности
+    XMLParser * writer = new XMLParser();
+
+    for(int i = 0; i < person->getSpells().count(); ++i)
+        writer->writeXmlFile(person->getSpells().at(i), QString(QString::number(person->getSpells().at(i)->ID())+tr("_")+person->getSpells().at(i)->name()+tr(".xml")));
+
+    writer->writeXmlFile(person, QString(QString::number(person->ID())+tr("_")+person->name()+tr(".xml")));
 }

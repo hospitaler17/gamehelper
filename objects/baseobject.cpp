@@ -37,7 +37,8 @@ void BaseObject::setObjectType(const OBJECT_XML_TYPE &objectType)
 
 void BaseObject::init()
 {
-    _ID = QDateTime::currentDateTime().toTime_t();
+    if(QT_VERSION < 0x060000) // 0xMMNNPP (MM = major, NN = minor, PP = patch)
+        _ID = QDateTime::currentDateTime().toTime_t();
     _name = "{name}";
     _objectType = OXT_UNDEFINED;
 
