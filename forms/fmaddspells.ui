@@ -408,6 +408,47 @@
        </widget>
       </item>
       <item>
+       <widget class="QFrame" name="frame_5">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <property name="spacing">
+          <number>3</number>
+         </property>
+         <property name="leftMargin">
+          <number>3</number>
+         </property>
+         <property name="topMargin">
+          <number>3</number>
+         </property>
+         <property name="rightMargin">
+          <number>3</number>
+         </property>
+         <property name="bottomMargin">
+          <number>3</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="pb_edit_save">
+           <property name="text">
+            <string>Сохранить</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pb_cancel">
+           <property name="text">
+            <string>Очистить</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
        <spacer name="verticalSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -447,14 +488,14 @@
          <item>
           <widget class="QPushButton" name="pb_add">
            <property name="text">
-            <string>Добавить</string>
+            <string>Создать</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pb_remove">
+          <widget class="QPushButton" name="pb_load_and_add">
            <property name="text">
-            <string>Удалить</string>
+            <string>Загрузить</string>
            </property>
           </widget>
          </item>
@@ -462,6 +503,13 @@
           <widget class="QPushButton" name="pb_save_edited">
            <property name="text">
             <string>Изменить</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pb_remove">
+           <property name="text">
+            <string>Удалить</string>
            </property>
           </widget>
          </item>
@@ -495,7 +543,7 @@
          <item>
           <widget class="QPushButton" name="pb_save_and_exit">
            <property name="text">
-            <string>Сохранить все и закрыть</string>
+            <string>Закрыть</string>
            </property>
           </widget>
          </item>

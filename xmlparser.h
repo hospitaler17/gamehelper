@@ -6,6 +6,7 @@
 #include <QXmlStreamWriter>
 #include <QXmlStreamAttribute>
 #include <QFile>
+#include <QFileInfoList>
 #include <QMessageBox>
 
 #include "common.h"
@@ -20,8 +21,10 @@ class XMLParser : public QObject
 public:
     explicit XMLParser(QObject *parent = nullptr);
 
-    void readXmlFile(Person *person, QString filename);
+    void readXmlFile(Person *person, QString filePath);
     void writeXmlFile(Person *person, QString filename);
+
+    void readXmlFile(Spell *spell, QString filePath);
     void writeXmlFile(Spell *spell, QString filename);
 
     QDir savePath() const;
@@ -32,7 +35,8 @@ private:
 
     QDir _savePath;
 
-    QString makeFullPathToFile(QString fn);
+    bool findSpellByID(Spell *spell);
+    QString makeFullPathToFile(QString fn, OBJECT_XML_TYPE oxt = OXT_UNDEFINED);
 signals:
 
 public slots:

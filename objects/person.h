@@ -62,7 +62,7 @@ public:
     qint16 agility() const;
     void setAgility(const qint16 &agility);
 
-private:
+protected:
 
     // COMMON
     QString _personClass;

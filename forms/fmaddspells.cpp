@@ -59,6 +59,11 @@ void FmAddSpells::initParams()
     ui->tableView->clicked(model->index(0,0));
 }
 
+void FmAddSpells::setCurrentSpell(Spell *spell)
+{
+    ui->sb_cooldawn->setValue(spell->cooldawn());
+}
+
 void FmAddSpells::slotOnItemSelectionChanged(QModelIndex index)
 {
     int currentRow = index.row();

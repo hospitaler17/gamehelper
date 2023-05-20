@@ -36,8 +36,10 @@ private:
     Ui::FmAddSpells *ui;
 
     Person * _person;
-
+    Spell * currentSpell;
     QStandardItemModel * model;
+
+    void setCurrentSpell(Spell * spell);
 
 private slots:
     void slotOnItemSelectionChanged(QModelIndex index);

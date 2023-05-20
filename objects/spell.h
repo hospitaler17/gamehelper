@@ -18,7 +18,7 @@ public:
     quint8 cooldawn() const;
     void setCooldawn(const quint8 &cooldawn);
 
-private:
+protected:
 
     QString _description;
     quint8  _cooldawn;

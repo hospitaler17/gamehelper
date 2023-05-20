@@ -40,7 +40,8 @@ SOURCES += \
     objects/map.cpp \
     objects/spell.cpp \
     objects/baseobject.cpp \
-    forms/baseform.cpp
+    forms/baseform.cpp \
+    objects/effect.cpp
 
 HEADERS += \
     objects/person.h \
@@ -56,7 +57,8 @@ HEADERS += \
     objects/map.h \
     objects/spell.h \
     objects/baseobject.h \
-    forms/baseform.h
+    forms/baseform.h \
+    objects/effect.h
 
 FORMS += \
     forms/fmaddperson.ui \
