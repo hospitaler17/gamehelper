@@ -10,15 +10,16 @@ enum OBJECT_XML_TYPE
     OXT_PERSON = 1,
     OXT_BATTLE = 2,
     OXT_MAP = 3,
-    OXT_SPELL = 4
+    OXT_SPELL = 4,
+    OXT_MONSTER = 5 //!>  ToDO: Подумать нужно ли тут выделять
 };
 
 #define PT_COUNTER 4
 enum PERSON_TYPE
 {
     PT_UNDEFINED    = -1,
-    PT_USUAL_ENEMY  = 0,
-    PT_BOSS_ENEMY   = 1,
+    PT_USUAL_ENEMY  = 0,//!>  ToDO: Подумать нужно ли тут выделять
+    PT_BOSS_ENEMY   = 1,//!>  ToDO: Подумать нужно ли тут выделять
     PT_PLAYER       = 2,
     PT_NEUTRAL      = 3
 };
@@ -32,6 +33,16 @@ enum PERSON_CHARACTERISTICS
     PC_INTELLIGENCE = 2,
     PC_INITIATIVE   = 3,
     PC_CHARISMA     = 4
+};
+#define IT_COUNTER 6
+enum ITEM_TYPE
+{
+    IT_QUESTITEM =0,
+    IT_GOLD = 1,
+    IT_ARMOR = 2,
+    IT_WEAPON =3,
+    IT_SPELLSCROLL =4,
+    IT_POTION =5
 };
 
 class Common : public QObject

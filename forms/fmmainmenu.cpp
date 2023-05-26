@@ -41,5 +41,14 @@ void FmMainMenu::on_pb_edit_characters_clicked()
 {
     FmAddPerson * fmAddPerson = new FmAddPerson();
     fmAddPerson->setWindowModality(Qt::ApplicationModal);
+    fmAddPerson->setWindowTitle("Персонаж");
     fmAddPerson->show();
+}
+
+void FmMainMenu::on_pb_edit_monsters_clicked()
+{
+    FmAddMoster * fmAddMonster = new FmAddMoster();
+    fmAddMonster->setWindowModality(Qt::ApplicationModal);
+    fmAddMonster->setWindowTitle("Монстр");
+    fmAddMonster->show();
 }
