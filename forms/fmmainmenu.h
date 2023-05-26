@@ -5,6 +5,7 @@
 
 #include "forms/fmaddperson.h"
 #include "forms/fmaddbattle.h"
+#include "forms/fmaddmoster.h"
 #include "forms/fmaddmap.h"
 
 namespace Ui {
@@ -28,6 +29,8 @@ private slots:
     void on_pb_start_game_clicked();
 
     void on_pb_edit_characters_clicked();
+
+    void on_pb_edit_monsters_clicked();
 
 private:
     Ui::FmMainMenu *ui;

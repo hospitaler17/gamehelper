@@ -41,7 +41,10 @@ SOURCES += \
     objects/spell.cpp \
     objects/baseobject.cpp \
     forms/baseform.cpp \
-    objects/effect.cpp
+    objects/effect.cpp \
+    forms/fmaddmoster.cpp \
+    objects/monster.cpp \
+    objects/item.cpp
 
 HEADERS += \
     objects/person.h \
@@ -58,11 +61,15 @@ HEADERS += \
     objects/spell.h \
     objects/baseobject.h \
     forms/baseform.h \
-    objects/effect.h
+    objects/effect.h \
+    forms/fmaddmoster.h \
+    objects/monster.h \
+    objects/item.h
 
 FORMS += \
     forms/fmaddperson.ui \
     forms/fmaddbattle.ui \
     forms/fmmainmenu.ui \
     forms/fmaddspells.ui \
-    forms/fmaddmap.ui
+    forms/fmaddmap.ui \
+    forms/fmaddmoster.ui

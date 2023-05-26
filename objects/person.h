@@ -35,7 +35,7 @@ public:
     PERSON_TYPE type() const;
     void setType(const PERSON_TYPE &type);
 
-    QPixmap icon() const;
+    QPixmap icon() const; //!> TODO: Возможно этот метод следует перенести в BaseObject т.к. иконки есть у всего.
     void setIcon(const QPixmap &icon);
 
     QString personClass() const;
