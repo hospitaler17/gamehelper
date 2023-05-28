@@ -44,6 +44,29 @@ enum ITEM_TYPE
     IT_SPELLSCROLL =4,
     IT_POTION =5
 };
+#define ET_COUNTER 7
+enum EFFECT_TYPE
+{
+  ET_NONE = 0
+};
+
+
+enum DIRECTIONSIDE
+{
+    DS_NONE =0,
+    DS_NORTH,
+    DS_SOUTH,
+    DS_WEST,
+    DS_EAST
+};
+enum SPELLPROFILE
+{
+    SP_TARGET =0,
+    SP_SELF,
+    SP_RECTANGLE,
+    SP_CONE,
+    SP_CIRCLE
+};
 
 class Common : public QObject
 {
