@@ -34,6 +34,12 @@ private slots:
 
     void on_pb_save_clicked();
 
+    void on_pb_load_clicked();
+
+    void on_pb_drop_clicked();
+
+    void on_pb_load_exists_clicked();
+
 private:
     Ui::FmAddPerson *ui;
 };

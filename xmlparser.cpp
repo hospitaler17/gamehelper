@@ -93,7 +93,7 @@ void XMLParser::writeXmlFile(Person *person, QString filename)
     writer.writeAttribute("id",             QString::number(person->ID()));
     writer.writeAttribute("name",           person->name());
     writer.writeAttribute("class",          person->personClass());
-    writer.writeAttribute("path_to_icon",   person->getPathToIcon());
+    writer.writeAttribute("path_to_icon",   person->pathToIcon());
     writer.writeAttribute("type",           QString::number(person->type()));
     writer.writeEndElement(); // main
 
@@ -118,7 +118,8 @@ void XMLParser::writeXmlFile(Person *person, QString filename)
     for(int i = 0; i < person->getSpells().count(); ++i)
     {
         writer.writeAttribute("id", QString::number(person->getSpells().at(i)->ID()));
-        writeXmlFile(person->getSpells().at(i), QString::number(person->getSpells().at(i)->ID()));
+        QString filename = QString::number(person->getSpells().at(i)->ID()) + tr("_") + person->getSpells().at(i)->name();
+        writeXmlFile(person->getSpells().at(i), filename);
     }
     writer.writeEndElement(); // spells
 

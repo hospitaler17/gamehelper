@@ -3,6 +3,7 @@
 # Project created by QtCreator 2023-05-02T19:38:12
 #
 #-------------------------------------------------
+include(common.pri)
 
 QT       += core gui xml
 

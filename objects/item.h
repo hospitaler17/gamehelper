@@ -10,7 +10,7 @@ public:
 
     ITEM_TYPE getType();
     void setDropChance(double);
-    double getDropChance();
+    double getDropChance() const;
 protected:
     ITEM_TYPE type;
     double dropChance;

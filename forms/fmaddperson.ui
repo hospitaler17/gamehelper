@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>410</width>
+    <width>441</width>
     <height>833</height>
    </rect>
   </property>
@@ -600,7 +600,11 @@
              <number>0</number>
             </property>
             <item>
-             <widget class="QSpinBox" name="sb_health"/>
+             <widget class="QSpinBox" name="sb_health">
+              <property name="maximum">
+               <number>999999</number>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -712,7 +716,11 @@
              <number>0</number>
             </property>
             <item>
-             <widget class="QSpinBox" name="sb_damage"/>
+             <widget class="QSpinBox" name="sb_damage">
+              <property name="maximum">
+               <number>999999</number>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -833,7 +841,11 @@
              <number>0</number>
             </property>
             <item>
-             <widget class="QSpinBox" name="sb_strength"/>
+             <widget class="QSpinBox" name="sb_strength">
+              <property name="maximum">
+               <number>999</number>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -945,7 +957,11 @@
              <number>0</number>
             </property>
             <item>
-             <widget class="QSpinBox" name="sb_intelligence"/>
+             <widget class="QSpinBox" name="sb_intelligence">
+              <property name="maximum">
+               <number>999</number>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -1057,7 +1073,11 @@
              <number>0</number>
             </property>
             <item>
-             <widget class="QSpinBox" name="sb_agility"/>
+             <widget class="QSpinBox" name="sb_agility">
+              <property name="maximum">
+               <number>999</number>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -1169,7 +1189,11 @@
              <number>0</number>
             </property>
             <item>
-             <widget class="QSpinBox" name="sb_charisma"/>
+             <widget class="QSpinBox" name="sb_charisma">
+              <property name="maximum">
+               <number>999</number>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -1281,7 +1305,11 @@
              <number>0</number>
             </property>
             <item>
-             <widget class="QSpinBox" name="sb_initiative"/>
+             <widget class="QSpinBox" name="sb_initiative">
+              <property name="maximum">
+               <number>999</number>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -1512,12 +1540,19 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Загрузить</string>
+         <string>Загрузить файлом</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="pb_load_exists">
+        <property name="text">
+         <string>Загрузить списком</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pb_drop">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
           <horstretch>0</horstretch>

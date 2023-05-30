@@ -44,10 +44,13 @@ enum ITEM_TYPE
     IT_SPELLSCROLL =4,
     IT_POTION =5
 };
-#define ET_COUNTER 7
+#define ET_COUNTER 2
 enum EFFECT_TYPE
 {
-  ET_NONE = 0
+    ET_NONE = 0,
+    ET_COLD,
+    ET_FIRE
+    //TODO: Дописать классификтор эффектов
 };
 
 
@@ -68,6 +71,27 @@ enum SPELLPROFILE
     SP_CIRCLE
 };
 
+enum STANDART_PROJECT_DIRS
+{
+    SPD_UNDEFINED = -1,
+
+    SPD_ICON = 0,
+
+    SPD_MAP,
+    SPD_PERSON,
+    SPD_SPELL,
+    SPD_ITEM,
+    SPD_EFFECT,
+
+    SPD_BATTLE,
+    SPD_GAME,
+
+    SPD_PLAYER,
+    SPD_BOSS,
+    SPD_MONSTER,
+    SPD_NPC
+};
+
 class Common : public QObject
 {
     Q_OBJECT
@@ -85,6 +109,25 @@ public:
             return tr("Нейтральный персонаж");
         return tr("Неизвестно");
     }
+    static QString getStandartProjectDirs(STANDART_PROJECT_DIRS spd)
+    {
+        if      (spd == SPD_ICON)
+            return tr("./res/icon/");
+        else if (spd == SPD_MAP)
+            return tr("./res/map/");
+        else if (spd == SPD_ITEM)
+            return tr("./res/item/");
+        else if (spd == SPD_EFFECT)
+            return tr("./res/effects/");
+        else if (spd == SPD_PERSON)
+            return tr("./res/person/");
+        else if (spd == SPD_SPELL)
+            return tr("./res/spell/");
+
+        //TODO: Дописать по необходимости стандартные пути
+
+        return tr("./");
+    }
     static QString getPersonCharacteristicDescription(PERSON_CHARACTERISTICS pc)
     {
         if      (pc == PC_STRENGTH)
@@ -101,6 +144,7 @@ public:
         return tr("Неизвестно");
     }
 };
+
 
 
 

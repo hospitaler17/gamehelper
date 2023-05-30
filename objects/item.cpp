@@ -15,7 +15,7 @@ void Item::setDropChance(double dc)
     dropChance = dc;
 }
 
-double Item::getDropChance()
+double Item::getDropChance() const
 {
     return dropChance;
 }

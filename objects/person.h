@@ -53,9 +53,6 @@ public:
     QVector<Spell *> getSpells() ;
     void setSpells(QVector<Spell *> value);
 
-    QString getPathToIcon() const;
-    void setPathToIcon(const QString &pathToIcon);
-
     qint16 strength() const;
     void setStrength(const qint16 &strength);
 
@@ -66,8 +63,7 @@ protected:
 
     // COMMON
     QString _personClass;
-    QPixmap _icon;
-    QString _pathToIcon;
+
     PERSON_TYPE _type = PT_UNDEFINED;
     // ***
 

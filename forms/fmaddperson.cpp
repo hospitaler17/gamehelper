@@ -31,7 +31,6 @@ void FmAddPerson::initParams()
 void FmAddPerson::on_pb_spells_clicked()
 {
     FmAddSpells * fmAddSpells = new FmAddSpells(person);
-    //TODO: передать модель со способностями
     fmAddSpells->setWindowModality(Qt::ApplicationModal);
     fmAddSpells->show();
 }
@@ -59,6 +58,39 @@ void FmAddPerson::on_pb_save_clicked()
 
     for(int i = 0; i < person->getSpells().count(); ++i)
         writer->writeXmlFile(person->getSpells().at(i), QString(QString::number(person->getSpells().at(i)->ID())+tr("_")+person->getSpells().at(i)->name()+tr(".xml")));
-
     writer->writeXmlFile(person, QString(QString::number(person->ID())+tr("_")+person->name()+tr(".xml")));
 }
+
+void FmAddPerson::on_pb_load_clicked()
+{
+
+}
+
+
+void FmAddPerson::on_pb_drop_clicked()
+{
+    ui->le_name->clear();
+    ui->le_class->clear();
+    ui->le_pic->clear();
+    ui->sb_health->setValue(0);
+    ui->sb_damage->setValue(0);
+
+    ui->cbox_type->setCurrentIndex(0);
+
+    ui->sb_initiative->setValue(0);
+    ui->sb_strength->setValue(0);
+    ui->sb_agility->setValue(0);
+    ui->sb_intelligence->setValue(0);
+    ui->sb_charisma->setValue(0);
+
+    ui->cbox_main_characteristic->setCurrentIndex(0);
+
+    person = new Person();
+}
+
+
+void FmAddPerson::on_pb_load_exists_clicked()
+{
+
+}
+

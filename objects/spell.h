@@ -12,7 +12,7 @@ class Spell : public BaseObject
     Q_OBJECT
 public:
 
-    enum SPELLTYPE
+    enum SPELL_TYPE
     {
         ST_DAMAGE = 0,
         ST_HEAL,

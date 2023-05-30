@@ -34,6 +34,8 @@ private slots:
 
 private:
     Ui::FmMainMenu *ui;
+
+    void initStandartDirs();
 };
 
 #endif // FMMAINMENU_H
