@@ -4,8 +4,9 @@ XMLParser::XMLParser(QObject *parent) : QObject(parent)
 {
 }
 
-void XMLParser::readXmlFile(Person* person, QString filePath)
+bool XMLParser::readXmlFile(Person* person, QString filePath)
 {
+
     QFile file(filePath);
     if( !file.open(QFile::ReadOnly | QFile::Text) )
     {
@@ -13,9 +14,10 @@ void XMLParser::readXmlFile(Person* person, QString filePath)
                              tr("Ошибка файла"),
                              QString(tr("Не удалось открыть файл:\n")+file.fileName()),
                              QMessageBox::Ok);
-        return;
+        return false;
     }
 
+    bool result = false;
     QXmlStreamReader reader;
     reader.setDevice(&file);
     reader.readNext();
@@ -31,7 +33,6 @@ void XMLParser::readXmlFile(Person* person, QString filePath)
                 person->setPersonClass(main.value("class").toString());
                 person->setPathToIcon(main.value("path_to_icon").toString());
                 person->setType((PERSON_TYPE) main.value("type").toInt());
-
             }
             else if (reader.name() == "current")
             {
@@ -48,6 +49,8 @@ void XMLParser::readXmlFile(Person* person, QString filePath)
                 person->setIntelligence(characteristics.value("intelligence").toInt());
                 person->setCharisma(characteristics.value("charisma").toInt());
                 person->setMainChars((PERSON_CHARACTERISTICS)characteristics.value("main_chars").toInt());
+
+                result = true; //NOTE: поставил тут, как специальный раздел для Person
             }
             else if (reader.name() == "spells")
             {
@@ -69,18 +72,19 @@ void XMLParser::readXmlFile(Person* person, QString filePath)
         reader.readNext();
     }
     file.close();
+    return result;
 }
 
-void XMLParser::writeXmlFile(Person *person, QString filename)
+bool XMLParser::writeXmlFile(Person *person, QString filename)
 {
     QFile file(makeFullPathToFile(filename, person->objectType()));
-    if( !file.open(QFile::ReadOnly | QFile::Text) )
+    if( !file.open(QFile::WriteOnly) )
     {
         QMessageBox::warning(nullptr,
                              tr("Ошибка файла"),
-                             QString(tr("Не удалось открыть файл:\n")+file.fileName()),
+                             QString(tr("Не удалось записать файл:\n")+file.fileName()),
                              QMessageBox::Ok);
-        return;
+        return false;
     }
 
     QXmlStreamWriter writer(&file);
@@ -125,9 +129,12 @@ void XMLParser::writeXmlFile(Person *person, QString filename)
 
     writer.writeEndElement(); // person
     writer.writeEndDocument();
+
+    file.close();
+    return true;
 }
 
-void XMLParser::readXmlFile(Spell *spell, QString filePath)
+bool XMLParser::readXmlFile(Spell *spell, QString filePath)
 {
     QFile file(filePath);
     if( !file.exists() || !file.open(QFile::WriteOnly) )
@@ -136,9 +143,10 @@ void XMLParser::readXmlFile(Spell *spell, QString filePath)
                              tr("Ошибка файла"),
                              QString(tr("Не удалось открыть файл:\n")+file.fileName()),
                              QMessageBox::Ok);
-        return;
+        return false;
     }
 
+    bool result = false;
     QXmlStreamReader reader;
     reader.setDevice(&file);
     reader.readNext();
@@ -157,24 +165,27 @@ void XMLParser::readXmlFile(Spell *spell, QString filePath)
                 QXmlStreamAttributes special = reader.attributes();
                 spell->setDescription(special.value("description").toString());
                 spell->setCooldawn(special.value("cooldawn").toInt());
+                result = true; //NOTE: поставил тут, как специальный раздел для Spell
             }
         }
         reader.readNext();
     }
     file.close();
 
+    return result;
 }
 
-void XMLParser::writeXmlFile(Spell *spell, QString filename)
+bool XMLParser::writeXmlFile(Spell *spell, QString filename)
 {
     QFile file(makeFullPathToFile(filename, spell->objectType()));
-    if( !file.exists() ||  !file.open(QFile::WriteOnly) )
+    if( !file.exists()
+        ||  !file.open(QFile::WriteOnly) )
     {
         QMessageBox::warning(nullptr,
                              tr("Ошибка файла"),
-                             QString(tr("Не удалось открыть файл:\n")+file.fileName()),
+                             QString(tr("Не удалось записать файл:\n")+file.fileName()),
                              QMessageBox::Ok);
-        return;
+        return false;
     }
 
     QXmlStreamWriter writer(&file);
@@ -196,6 +207,8 @@ void XMLParser::writeXmlFile(Spell *spell, QString filename)
 
     writer.writeEndElement(); // spell
     writer.writeEndDocument();
+
+    return true;
 }
 
 QDir XMLParser::savePath() const
@@ -249,7 +262,10 @@ QString XMLParser::makeFullPathToFile(QString fn, OBJECT_XML_TYPE oxt)
     default:
         break;
     }
-    QString path = _savePath.path() + subdir + fn;
+    QDir dir;
+    QString path = fn;
+    if( dir.exists(subdir) || dir.mkdir(subdir) )
+        path.push_front(subdir);
     return path.contains(".xml", Qt::CaseInsensitive)?path:path+tr(".xml");
 }
 

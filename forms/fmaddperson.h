@@ -2,6 +2,7 @@
 #define FMADDPERSON_H
 
 #include <QWidget>
+#include <QFileDialog>
 
 
 #include "forms/baseform.h"
@@ -28,6 +29,8 @@ protected:
 
 private:
     Person * person;
+
+    void loadPersonAttributsOnForm();
 private slots:
 
     void on_pb_spells_clicked();

@@ -126,3 +126,9 @@ void Person::setAgility(const qint16 &agility)
 {
     _agility = agility;
 }
+
+bool Person::readXmlFile(QString fileName)
+{
+    XMLParser * parser = new XMLParser();
+    return parser->readXmlFile(this, fileName);
+}

@@ -10,7 +10,7 @@
 #include "objects/baseobject.h"
 #include "objects/spell.h"
 #include "common.h"
-
+#include "xmlparser.h"
 
 
 
@@ -87,6 +87,7 @@ protected:
 signals:
 
 public slots:
+    bool readXmlFile(QString fileName);
 };
 
 #endif // PERSON_H

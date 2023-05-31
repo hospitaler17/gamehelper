@@ -15,7 +15,7 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <widget class="QFrame" name="frame">
+    <widget class="QFrame" name="frame_leftPanel">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>50</horstretch>
@@ -43,7 +43,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QFrame" name="frame_2">
+    <widget class="QFrame" name="frame_rightPanel">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>50</horstretch>
@@ -408,7 +408,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QFrame" name="frame_5">
+       <widget class="QFrame" name="frame_currentEdit">
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
         </property>
@@ -493,16 +493,16 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pb_load_and_add">
+          <widget class="QPushButton" name="pb_load_and_add_file">
            <property name="text">
-            <string>Загрузить</string>
+            <string>Загрузить файл</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pb_save_edited">
+          <widget class="QPushButton" name="pb_load_and_add_list">
            <property name="text">
-            <string>Изменить</string>
+            <string>Загрузить список</string>
            </property>
           </widget>
          </item>
@@ -517,7 +517,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QFrame" name="frame_3">
+       <widget class="QFrame" name="frame_exit">
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
         </property>
