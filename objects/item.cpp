@@ -19,3 +19,8 @@ double Item::getDropChance()
 {
     return dropChance;
 }
+
+void Item::readFromXML(QString path)
+{
+
+}

@@ -16,13 +16,13 @@ public:
 
     typedef QPair<quint8, quint8> SkillValue; //!> Любой навык имеет  минимальный (first) и макс урон/лечение (second)
 
-                                                //!> quint8 - число ходов
+
 
     struct CastResult
     {
         /* для аое механики TODO: QList<TargetId, */ quint8/*>*/ value;
 
-        /* для аое механики TODO: QList<TargetId, */Effect /*>*/ effect;
+        /* для аое механики TODO: QList<TargetId, */QPair<EFFECT_TYPE, quint8> /*>*/ effectResolve;   //!> quint8 - число ходов
 
     };
 
@@ -44,12 +44,11 @@ public:
     quint8 cooldawn() const;
     void setCooldawn(const quint8 &cooldawn);
 
-    void readFromXml(QString path);
-
 
     bool isAvailiable();
     CastResult cast(/*для аое механики TODO: QList<Target>*/);
 
+    void readFromXML(QString path);
 protected:
 
 
@@ -57,7 +56,7 @@ protected:
     QString _description;   //!> Описание скила
     quint8  _cooldawn;      //!> Базовый откат скила, количество ходов до доступности
     quint8  _currentCooldawn;      //!> Текущий откат скила, количество ходов до доступности
-    Effect* effect = NULL; //!> Эффект, накладываемый заклинание
+    Effect* _effect = NULL; //!> Эффект, накладываемый заклинание
 
     SkillValue _value; //!> Значение урона или лечение наносимое скилом
     quint8 _range =1; //!> Дальность использования навыка

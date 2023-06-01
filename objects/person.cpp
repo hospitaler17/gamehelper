@@ -146,3 +146,8 @@ void Person::setAgility(const qint16 &agility)
 {
     _agility = agility;
 }
+
+void Person::readFromXML(QString path)
+{
+
+}

@@ -9,10 +9,10 @@
 
 // шаблон генератора из мин макс
 
-static quint32 generate(quint32 min, quint32 max)
+static quint8 generate(QPair<quint8, quint8> pair)
 {
     qsrand(QDateTime::currentDateTime().toTime_t());
-    return (qrand()% (max - min)) + min;
+    return (qrand()% (pair.second - pair.first)) + pair.first;
 }
 
 
