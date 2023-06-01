@@ -6,19 +6,33 @@
 
 #include "objects/baseobject.h"
 #include "common.h"
+#include "effect.h"
+
 
 class Spell : public BaseObject
 {
     Q_OBJECT
 public:
 
+    typedef QPair<quint8, quint8> SkillValue; //!> Любой навык имеет  минимальный (first) и макс урон/лечение (second)
+
+                                                //!> quint8 - число ходов
+
+    struct CastResult
+    {
+        /* для аое механики TODO: QList<TargetId, */ quint8/*>*/ value;
+
+        /* для аое механики TODO: QList<TargetId, */Effect /*>*/ effect;
+
+    };
+
     enum SPELLTYPE
     {
         ST_DAMAGE = 0,
         ST_HEAL,
-        ST_BUFF,
-        ST_DEBUFF,
-     };
+
+    };
+
 
     explicit Spell(BaseObject *parent = 0);
 
@@ -30,16 +44,30 @@ public:
     quint8 cooldawn() const;
     void setCooldawn(const quint8 &cooldawn);
 
+    void readFromXml(QString path);
+
+
+    bool isAvailiable();
+    CastResult cast(/*для аое механики TODO: QList<Target>*/);
+
 protected:
 
+
+
     QString _description;   //!> Описание скила
-    quint8  _cooldawn;      //!> Откат скила, количество ходов до доступности
-    EFFECT_TYPE _effectType = ET_NONE; //!> Эффект, накладываемый заклинанием, определяется для ST_BUFF & ST_DEBUFF
-    quint8 _value =0; //!> Значение урона или лечение наносимое скилом
+    quint8  _cooldawn;      //!> Базовый откат скила, количество ходов до доступности
+    quint8  _currentCooldawn;      //!> Текущий откат скила, количество ходов до доступности
+    Effect* effect = NULL; //!> Эффект, накладываемый заклинание
+
+    SkillValue _value; //!> Значение урона или лечение наносимое скилом
     quint8 _range =1; //!> Дальность использования навыка
     quint8 _castRadius=1;   //!> Дальность распространения навыка, относително точки применения
+    quint8 _currentSkillLvl =1; //!> Текущий уровень прокачки навыка
 
-    QHash<QPair<quint8, quint8>,quint8> _area; //!> Область применения скила
+    QHash <quint8, SkillValue> _skillValueDependence; //!>Порядок изменения базового значения урона/лечения(SkillValue) в зависимости от уровня навыка (quint8)
+
+
+    QHash<QPair<quint8, quint8>,quint8> _area; //!> Область применения скила  QPair это точка
     DIRECTIONSIDE _direction; //!> Направления применения навыка
 
 
