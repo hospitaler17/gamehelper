@@ -59,6 +59,8 @@ public:
     qint16 agility() const;
     void setAgility(const qint16 &agility);
 
+    void readFromXML(QString path);
+
 protected:
 
     // COMMON

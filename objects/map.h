@@ -12,7 +12,7 @@ class Map : public BaseObject
 public:
     explicit Map(BaseObject *parent = 0);
 
-
+    void readFromXML(QString path);
 
 private:
 
