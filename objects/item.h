@@ -11,6 +11,8 @@ public:
     ITEM_TYPE getType();
     void setDropChance(double);
     double getDropChance();
+
+    void readFromXML(QString path);
 protected:
     ITEM_TYPE type;
     double dropChance;

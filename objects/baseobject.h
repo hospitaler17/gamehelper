@@ -21,6 +21,7 @@ public:
     OBJECT_XML_TYPE objectType() const;
     void setObjectType(const OBJECT_XML_TYPE &objectType);
 
+    virtual void readFromXML(QString path) = 0;
 protected:
     quint64 _ID;
     QString _name;
