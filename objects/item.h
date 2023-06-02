@@ -13,6 +13,8 @@ public:
     double getDropChance();
 
     void readFromXML(QString path);
+    double getDropChance() const;
+
 protected:
     ITEM_TYPE type;
     double dropChance;

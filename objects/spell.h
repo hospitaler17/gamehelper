@@ -27,6 +27,7 @@ public:
     };
 
     enum SPELLTYPE
+
     {
         ST_DAMAGE = 0,
         ST_HEAL,

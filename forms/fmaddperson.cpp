@@ -28,10 +28,30 @@ void FmAddPerson::initParams()
     person = new Person();
 }
 
+void FmAddPerson::loadPersonAttributsOnForm()
+{
+    // main
+    ui->le_name->setText(person->name());
+    ui->le_class->setText(person->personClass());
+    ui->le_pic->setText(person->pathToIcon());
+    ui->cbox_type->setCurrentIndex(person->type());
+
+    ui->sb_health->setValue(person->maxHealth());
+    ui->sb_damage->setValue(person->damage());
+
+    // characteristic
+    ui->sb_initiative->setValue(person->initiative());
+    ui->sb_strength->setValue(person->strength());
+    ui->sb_agility->setValue(person->agility());
+    ui->sb_intelligence->setValue(person->intelligence());
+    ui->sb_charisma->setValue(person->charisma());
+
+    ui->cbox_main_characteristic->setCurrentIndex(person->mainChars());
+}
+
 void FmAddPerson::on_pb_spells_clicked()
 {
     FmAddSpells * fmAddSpells = new FmAddSpells(person);
-    //TODO: передать модель со способностями
     fmAddSpells->setWindowModality(Qt::ApplicationModal);
     fmAddSpells->show();
 }
@@ -59,6 +79,55 @@ void FmAddPerson::on_pb_save_clicked()
 
     for(int i = 0; i < person->getSpells().count(); ++i)
         writer->writeXmlFile(person->getSpells().at(i), QString(QString::number(person->getSpells().at(i)->ID())+tr("_")+person->getSpells().at(i)->name()+tr(".xml")));
-
     writer->writeXmlFile(person, QString(QString::number(person->ID())+tr("_")+person->name()+tr(".xml")));
+    delete writer;
 }
+
+void FmAddPerson::on_pb_load_clicked()
+{
+    QFileDialog * dialog = new  QFileDialog();
+    dialog->setFileMode(QFileDialog::ExistingFile);
+    QStringList fileName;
+    if (dialog->exec())
+        fileName = dialog->selectedFiles();
+
+    if (fileName.count() == 0)
+        return;
+
+    XMLParser * writer = new XMLParser();
+
+    writer->readXmlFile(person, fileName.at(0));
+
+    delete writer;
+
+    loadPersonAttributsOnForm();
+}
+
+
+void FmAddPerson::on_pb_drop_clicked()
+{
+    ui->le_name->clear();
+    ui->le_class->clear();
+    ui->le_pic->clear();
+    ui->sb_health->setValue(0);
+    ui->sb_damage->setValue(0);
+
+    ui->cbox_type->setCurrentIndex(0);
+
+    ui->sb_initiative->setValue(0);
+    ui->sb_strength->setValue(0);
+    ui->sb_agility->setValue(0);
+    ui->sb_intelligence->setValue(0);
+    ui->sb_charisma->setValue(0);
+
+    ui->cbox_main_characteristic->setCurrentIndex(0);
+
+    person = new Person();
+}
+
+
+void FmAddPerson::on_pb_load_exists_clicked()
+{
+
+}
+

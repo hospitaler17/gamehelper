@@ -5,8 +5,6 @@ Spell::Spell(BaseObject *parent) : BaseObject(parent)
     setObjectType(OXT_SPELL);
 }
 
-
-
 QString Spell::description() const
 {
     return _description;
