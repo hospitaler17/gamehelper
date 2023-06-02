@@ -20,5 +20,7 @@ EFFECT_TYPE Effect::getType()
 }
 bool Effect::readFromXML(QString path)
 {
-    return false;
+   Q_UNUSED(path);
+
+   return false;
 }

@@ -22,5 +22,6 @@ double Item::getDropChance() const
 
 bool Item::readFromXML(QString path)
 {
+    Q_UNUSED(path);
     return false;
 }

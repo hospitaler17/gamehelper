@@ -31,6 +31,8 @@ public:
     void setPathToIcon(const QString &newPathToIcon);
 
 
+
+//    virtual void endOfTurn() = 0;
 protected:
     quint64 _ID;
     QString _name;
