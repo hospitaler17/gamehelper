@@ -15,7 +15,31 @@ static quint8 generate(QPair<quint8, quint8> pair)
     return (qrand()% (pair.second - pair.first)) + pair.first;
 }
 
+static quint8 cube20()
+{
+    return generate(qMakePair(1,20));
+}
+static quint8 cube10()
+{
+    return generate(qMakePair(1,10));
+}
+static quint8 cube12()
+{
+    return generate(qMakePair(1,12));
+}
+static quint8 cube8()
+{
+    return generate(qMakePair(1,8));
+}
+static quint8 cube4()
+{
+    return generate(qMakePair(1,4));
+}
 
+static quint8 cube6()
+{
+    return generate(qMakePair(1,6));
+}
 
 enum OBJECT_XML_TYPE
 {

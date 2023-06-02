@@ -8,6 +8,7 @@ Map::Map(BaseObject *parent)
 
 bool Map::readFromXML(QString path)
 {
+   Q_UNUSED(path);
     return false;
 }
 

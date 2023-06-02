@@ -10,9 +10,9 @@
 #include <QMessageBox>
 
 #include "common.h"
-#include "objects/person.h"
-#include "objects/battle.h"
-#include "objects/map.h"
+#include "game/actors/person.h"
+#include "game/maps/battle.h"
+#include "game/maps/map.h"
 #include "objects/spell.h"
 
 class Person;
