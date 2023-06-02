@@ -29,43 +29,47 @@ INCLUDEPATH += forms \
 
 SOURCES += \
         main.cpp \
-    objects/person.cpp \
     xmlparser.cpp \
     processor.cpp \
-    objects/battle.cpp \
     forms/fmaddperson.cpp \
     forms/fmaddbattle.cpp \
     forms/fmmainmenu.cpp \
     forms/fmaddspells.cpp \
     forms/fmaddmap.cpp \
-    objects/map.cpp \
     objects/spell.cpp \
     objects/baseobject.cpp \
     forms/baseform.cpp \
     objects/effect.cpp \
     forms/fmaddmoster.cpp \
-    objects/monster.cpp \
-    objects/item.cpp
+    objects/item.cpp \
+    game/maps/globalmap.cpp \
+    game/maps/battle.cpp \
+    game/maps/battlefield.cpp \
+    game/maps/map.cpp \
+    game/actors/monster.cpp \
+    game/actors/person.cpp
 
 HEADERS += \
-    objects/person.h \
     common.h \
     xmlparser.h \
     processor.h \
-    objects/battle.h \
     forms/fmaddperson.h \
     forms/fmaddbattle.h \
     forms/fmmainmenu.h \
     forms/fmaddspells.h \
     forms/fmaddmap.h \
-    objects/map.h \
     objects/spell.h \
     objects/baseobject.h \
     forms/baseform.h \
     objects/effect.h \
     forms/fmaddmoster.h \
-    objects/monster.h \
-    objects/item.h
+    objects/item.h \
+    game/maps/globalmap.h \
+    game/maps/battle.h \
+    game/maps/battlefield.h \
+    game/maps/map.h \
+    game/actors/monster.h \
+    game/actors/person.h
 
 FORMS += \
     forms/fmaddperson.ui \
