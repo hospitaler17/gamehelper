@@ -27,6 +27,11 @@ void Spell::setCooldawn(const quint8 &cooldawn)
     _cooldawn = cooldawn;
 }
 
+bool Spell::isAvailiable()
+{
+    return _currentCooldawn>0?false:true;
+}
+
 Spell::CastResult Spell::cast()
 {
     CastResult cr;
