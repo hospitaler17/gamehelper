@@ -10,7 +10,7 @@
 #include "objects/baseobject.h"
 #include "objects/spell.h"
 #include "common.h"
-
+#include "xmlparser.h"
 
 
 
@@ -35,7 +35,7 @@ public:
     PERSON_TYPE type() const;
     void setType(const PERSON_TYPE &type);
 
-    QPixmap icon() const;
+    QPixmap icon() const; //!> TODO: Возможно этот метод следует перенести в BaseObject т.к. иконки есть у всего.
     void setIcon(const QPixmap &icon);
 
     QString personClass() const;
@@ -53,21 +53,19 @@ public:
     QVector<Spell *> getSpells() ;
     void setSpells(QVector<Spell *> value);
 
-    QString getPathToIcon() const;
-    void setPathToIcon(const QString &pathToIcon);
-
     qint16 strength() const;
     void setStrength(const qint16 &strength);
 
     qint16 agility() const;
     void setAgility(const qint16 &agility);
 
+    bool readFromXML(QString path);
+
 protected:
 
     // COMMON
     QString _personClass;
-    QPixmap _icon;
-    QString _pathToIcon;
+
     PERSON_TYPE _type = PT_UNDEFINED;
     // ***
 
@@ -91,6 +89,7 @@ protected:
 signals:
 
 public slots:
+
 };
 
 #endif // PERSON_H

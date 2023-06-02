@@ -9,6 +9,8 @@ FmMainMenu::FmMainMenu(QWidget *parent) :
     ui->submenu_1->setCurrentWidget(ui->page_submenu_1_empty);
     ui->menu->setCurrentWidget(ui->page_main_menu);
 
+
+    ui->pb_edit_monsters->hide();
 }
 
 FmMainMenu::~FmMainMenu()
@@ -41,5 +43,22 @@ void FmMainMenu::on_pb_edit_characters_clicked()
 {
     FmAddPerson * fmAddPerson = new FmAddPerson();
     fmAddPerson->setWindowModality(Qt::ApplicationModal);
+    fmAddPerson->setWindowTitle("Персонаж");
     fmAddPerson->show();
+}
+
+void FmMainMenu::on_pb_edit_monsters_clicked()
+{
+    FmAddMoster * fmAddMonster = new FmAddMoster();
+    fmAddMonster->setWindowModality(Qt::ApplicationModal);
+    fmAddMonster->setWindowTitle("Монстр");
+    fmAddMonster->show();
+}
+
+void FmMainMenu::initStandartDirs()
+{
+    // icons dir
+    QDir dir;
+    dir.mkdir("icons");
+
 }

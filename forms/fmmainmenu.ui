@@ -133,7 +133,7 @@
           <enum>QFrame::Raised</enum>
          </property>
          <property name="currentIndex">
-          <number>2</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="page_submenu_1_empty"/>
          <widget class="QWidget" name="page_submenu_1_editor">
@@ -155,6 +155,13 @@
             <widget class="QPushButton" name="pb_edit_characters">
              <property name="text">
               <string>Персонажи</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pb_edit_monsters">
+             <property name="text">
+              <string>Монстры</string>
              </property>
             </widget>
            </item>
@@ -194,7 +201,6 @@
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <zorder>frame_submenu_3</zorder>
      </widget>
     </item>
     <item>
@@ -235,7 +241,6 @@
    <zorder>frame_submenu_3</zorder>
    <zorder>frame_submenu_4</zorder>
    <zorder>frame_submenu_2</zorder>
-   <zorder>submenu_1</zorder>
   </widget>
  </widget>
  <resources/>
