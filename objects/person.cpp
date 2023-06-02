@@ -57,16 +57,6 @@ void Person::setType(const PERSON_TYPE &type)
     _type = type;
 }
 
-QPixmap Person::icon() const
-{
-    return _icon;
-}
-
-void Person::setIcon(const QPixmap &icon)
-{
-    _icon = icon;
-}
-
 QString Person::personClass() const
 {
     return _personClass;
@@ -117,16 +107,6 @@ void Person::setSpells(QVector<Spell*> value)
 //    _spells = value;
 }
 
-QString Person::getPathToIcon() const
-{
-    return _pathToIcon;
-}
-
-void Person::setPathToIcon(const QString &pathToIcon)
-{
-    _pathToIcon = pathToIcon;
-}
-
 qint16 Person::strength() const
 {
     return _strength;
@@ -147,7 +127,10 @@ void Person::setAgility(const qint16 &agility)
     _agility = agility;
 }
 
-void Person::readFromXML(QString path)
+bool Person::readFromXML(QString path)
 {
-
+    XMLParser * parser = new XMLParser();
+    bool res = parser->readXmlFile(this, path);
+    delete parser;
+    return res;
 }

@@ -15,12 +15,12 @@ void Item::setDropChance(double dc)
     dropChance = dc;
 }
 
-double Item::getDropChance()
+double Item::getDropChance() const
 {
     return dropChance;
 }
 
-void Item::readFromXML(QString path)
+bool Item::readFromXML(QString path)
 {
-
+    return false;
 }

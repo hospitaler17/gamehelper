@@ -15,17 +15,21 @@
 #include "objects/map.h"
 #include "objects/spell.h"
 
+class Person;
+class Spell;
+class Map;
+
 class XMLParser : public QObject
 {
     Q_OBJECT
 public:
     explicit XMLParser(QObject *parent = nullptr);
 
-    void readXmlFile(Person *person, QString filePath);
-    void writeXmlFile(Person *person, QString filename);
+    bool readXmlFile(Person *person, QString filePath);
+    bool writeXmlFile(Person *person, QString filename);
 
-    void readXmlFile(Spell *spell, QString filePath);
-    void writeXmlFile(Spell *spell, QString filename);
+    bool readXmlFile(Spell *spell, QString filePath);
+    bool writeXmlFile(Spell *spell, QString filename);
 
     QDir savePath() const;
     void setSavePath(const QDir &savePath);

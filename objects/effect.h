@@ -15,7 +15,7 @@ public:
     QPair<EFFECT_TYPE,quint8> resolve();
 
     EFFECT_TYPE getType();
-    void readFromXML(QString path);
+    bool readFromXML(QString path);
 
     protected:
         EFFECT_TYPE _type;

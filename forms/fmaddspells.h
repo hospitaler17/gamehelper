@@ -2,6 +2,8 @@
 #define FMADDSPELLS_H
 
 #include <QWidget>
+#include <QModelIndexList>
+#include <QAbstractItemView>
 #include <QAbstractItemModel>
 #include <QStandardItemModel>
 
@@ -12,9 +14,8 @@
 #define TABLE_SPELLS_COLUMN_NAMES_COUNT 3
 enum TABLE_SPELLS_COLUMN_NAMES
 {
-    TSCN_NAME = 0,
-    TSCN_DECRIPTION = 1,
-    TSCN_COOLDAWN = 2
+    TSCN_ID = 0,
+    TSCN_NAME = 1
 };
 
 namespace Ui {
@@ -40,10 +41,15 @@ private:
     QStandardItemModel * model;
 
     void setCurrentSpell(Spell * spell);
-
-private slots:
+    void loadSpellOnForm(Spell * spell);
+    void clearFieldsOnForm();
+protected slots:
     void slotOnItemSelectionChanged(QModelIndex index);
 
+    void on_pb_save_and_exit_clicked();
+    void on_pb_remove_clicked();
+    void on_pb_cancel_clicked();
+    void on_pb_add_clicked();
 };
 
 #endif // FMADDSPELLS_H

@@ -5,8 +5,6 @@ Spell::Spell(BaseObject *parent) : BaseObject(parent)
     setObjectType(OXT_SPELL);
 }
 
-
-
 QString Spell::description() const
 {
     return _description;
@@ -40,7 +38,7 @@ Spell::CastResult Spell::cast()
     return cr;
 }
 
-void Spell::readFromXML(QString path)
+bool Spell::readFromXML(QString path)
 {
-
+    return false;
 }
