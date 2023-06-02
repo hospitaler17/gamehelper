@@ -6,8 +6,8 @@ Map::Map(BaseObject *parent)
     setObjectType(OXT_MAP);
 }
 
-void Map::readFromXML(QString path)
+bool Map::readFromXML(QString path)
 {
-
+    return false;
 }
 

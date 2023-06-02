@@ -49,7 +49,7 @@ public:
     bool isAvailiable();
     CastResult cast(/*для аое механики TODO: QList<Target>*/);
 
-    void readFromXML(QString path);
+    bool readFromXML(QString path);
 protected:
 
 

@@ -22,7 +22,7 @@ public:
     OBJECT_XML_TYPE objectType() const;
     void setObjectType(const OBJECT_XML_TYPE &objectType);
 
-    virtual void readFromXML(QString path) = 0;
+    virtual bool readFromXML(QString path) = 0;
 
     QPixmap icon() const;
     void setIcon(const QPixmap &newIcon);

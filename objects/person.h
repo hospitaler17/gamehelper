@@ -59,7 +59,7 @@ public:
     qint16 agility() const;
     void setAgility(const qint16 &agility);
 
-    void readFromXML(QString path);
+    bool readFromXML(QString path);
 
 protected:
 
@@ -89,7 +89,7 @@ protected:
 signals:
 
 public slots:
-    bool readXmlFile(QString fileName);
+
 };
 
 #endif // PERSON_H

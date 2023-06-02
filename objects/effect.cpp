@@ -18,5 +18,7 @@ EFFECT_TYPE Effect::getType()
 {
     return _type;
 }
-void Effect::readFromXML(QString path)
-{}
+bool Effect::readFromXML(QString path)
+{
+    return false;
+}
