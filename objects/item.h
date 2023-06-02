@@ -12,7 +12,7 @@ public:
     void setDropChance(double);
     double getDropChance();
 
-    void readFromXML(QString path);
+    bool readFromXML(QString path);
     double getDropChance() const;
 
 protected:

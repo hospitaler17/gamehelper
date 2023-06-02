@@ -38,7 +38,7 @@ Spell::CastResult Spell::cast()
     return cr;
 }
 
-void Spell::readFromXML(QString path)
+bool Spell::readFromXML(QString path)
 {
-
+    return false;
 }
