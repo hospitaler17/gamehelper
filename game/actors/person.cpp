@@ -104,7 +104,7 @@ QVector<Spell*> Person::getSpells()
 
 void Person::setSpells(QVector<Spell*> value)
 {
-//    _spells = value;
+    _spells = value;
 }
 
 qint16 Person::strength() const

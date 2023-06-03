@@ -131,7 +131,6 @@ void FmAddSpells::on_pb_add_clicked()
 {
     clearFieldsOnForm();
     ui->tableView->clearSelection();
-//    ui->fram
-       ui->frame_currentEdit->show();
+    ui->frame_currentEdit->show();
 }
 

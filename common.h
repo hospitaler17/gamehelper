@@ -6,13 +6,24 @@
 #include <QtGlobal>
 #include <QDateTime>
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+#include <QRandomGenerator>
+#endif
+
 
 // шаблон генератора из мин макс
 
-static quint8 generate(QPair<quint8, quint8> pair)
+Q_DECL_UNUSED /*Временно*/ static quint8 generate(QPair<quint8, quint8> pair )  // QPair(min, max) pair
 {
+    quint8 number = __UINT8_MAX__;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+    QRandomGenerator rg;
+    number = rg.bounded(pair.first, pair.second);
+#else
     qsrand(QDateTime::currentDateTime().toTime_t());
-    return (qrand()% (pair.second - pair.first)) + pair.first;
+    number = (qrand()% (pair.second - pair.first)) + pair.first;
+#endif
+    return number;
 }
 
 static quint8 cube20()
@@ -81,7 +92,7 @@ enum ITEM_TYPE
     IT_SPELLSCROLL =4,
     IT_POTION =5
 };
-#define ET_COUNTER 2
+#define ET_COUNTER 6
 enum EFFECT_TYPE
 {
     ET_NONE = 0,
@@ -89,7 +100,7 @@ enum EFFECT_TYPE
     ET_BLEED = 2,       //!> Кровотечение
     ET_POISIONED = 3,   //!> Отравление
     ET_STUN = 4,        //!> Оглушение
-    ET_FREEZED =5,      //!> Заморозка
+    ET_FREEZED = 5,      //!> Заморозка
     ET_ATTACK_UP = 6,   //!> Задел - Баф атаки
     ET_ATTACK_DOWN = 7, //!> Задел - деБаф атаки
     ET_DEFENCE_UP = 8,  //!> Задел - Баф защиты
