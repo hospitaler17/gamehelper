@@ -47,7 +47,8 @@ SOURCES += \
     game/maps/battlefield.cpp \
     game/maps/map.cpp \
     game/actors/monster.cpp \
-    game/actors/person.cpp
+    game/actors/person.cpp \
+    game/maps/questmap.cpp
 
 HEADERS += \
     common.h \
@@ -69,7 +70,8 @@ HEADERS += \
     game/maps/battlefield.h \
     game/maps/map.h \
     game/actors/monster.h \
-    game/actors/person.h
+    game/actors/person.h \
+    game/maps/questmap.h
 
 FORMS += \
     forms/fmaddperson.ui \

@@ -5,6 +5,7 @@
 #include <QDateTime>
 
 #include "baseobject.h"
+#include "battlefield.h"
 
 
 class Battle : public BaseObject
@@ -12,6 +13,10 @@ class Battle : public BaseObject
     Q_OBJECT
 public:
     explicit Battle(BaseObject *parent = nullptr);
+
+
+protected:
+    BattleField* _battleField;
 
 private:
 signals:
