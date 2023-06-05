@@ -107,6 +107,11 @@ void Person::setSpells(QVector<Spell*> value)
     _spells = value;
 }
 
+void Person::addSpell(Spell *spell)
+{
+    _spells.append(spell);
+}
+
 qint16 Person::strength() const
 {
     return _strength;

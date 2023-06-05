@@ -2,6 +2,7 @@
 #define FMADDSPELLS_H
 
 #include <QWidget>
+#include <QModelIndex>
 #include <QModelIndexList>
 #include <QAbstractItemView>
 #include <QAbstractItemModel>
@@ -37,19 +38,24 @@ private:
     Ui::FmAddSpells *ui;
 
     Person * _person;
-    Spell * currentSpell;
+    Spell * _currentSpell;
     QStandardItemModel * model;
+    QModelIndex _selectedSpell;
 
     void setCurrentSpell(Spell * spell);
     void loadSpellOnForm(Spell * spell);
     void clearFieldsOnForm();
 protected slots:
     void slotOnItemSelectionChanged(QModelIndex index);
+    void slotFrintCurrentSpellOnForm(QModelIndex index);
 
     void on_pb_save_and_exit_clicked();
     void on_pb_remove_clicked();
     void on_pb_cancel_clicked();
     void on_pb_add_clicked();
+private slots:
+    void on_pb_edit_save_clicked();
+    void initTable();
 };
 
 #endif // FMADDSPELLS_H
