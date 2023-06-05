@@ -9,6 +9,7 @@
 #include "forms/fmaddspells.h"
 #include "game/actors//person.h"
 #include "objects/spell.h"
+#include "widgets/scaledpixmap.h"
 
 #include "xmlparser.h"
 
@@ -42,6 +43,8 @@ private slots:
     void on_pb_drop_clicked();
 
     void on_pb_load_exists_clicked();
+
+    void on_tb_pic_clicked();
 
 private:
     Ui::FmAddPerson *ui;
