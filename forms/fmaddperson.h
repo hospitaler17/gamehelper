@@ -26,7 +26,7 @@ public:
     ~FmAddPerson();
 
 protected:
-    virtual void initParams();
+    void initParams();
 
 private:
     Person * person;

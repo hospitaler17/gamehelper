@@ -100,6 +100,10 @@ void FmAddPerson::on_pb_load_clicked()
     XMLParser * writer = new XMLParser();
 
     writer->readXmlFile(person, fileName.at(0));
+    for(int i = 0; i < person->getSpells().count(); ++i)
+    {
+
+    }
 
     delete writer;
 
@@ -131,7 +135,7 @@ void FmAddPerson::on_pb_drop_clicked()
 
 void FmAddPerson::on_pb_load_exists_clicked()
 {
-
+    //TODO: Добавить Форму с листом существующих элементов
 }
 
 

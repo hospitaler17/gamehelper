@@ -59,7 +59,9 @@ bool XMLParser::readXmlFile(Person* person, QString filePath)
             }
             else if (reader.name() == XML_NAME(tr("spells")))
             {
+                // не работает
                 QXmlStreamAttributes spells = reader.attributes();
+                QString id = spells.value("id").toString();
                 QVector<Spell *> spellsVector;
                 for(int i = 0; i < spells.count(); ++i)
                 {
@@ -183,8 +185,7 @@ bool XMLParser::readXmlFile(Spell *spell, QString filePath)
 bool XMLParser::writeXmlFile(Spell *spell, QString filename)
 {
     QFile file(makeFullPathToFile(filename, spell->objectType()));
-    if( !file.exists()
-        ||  !file.open(QFile::WriteOnly) )
+    if( !file.open(QFile::WriteOnly) )
     {
         QMessageBox::warning(nullptr,
                              tr("Ошибка файла"),
@@ -269,7 +270,10 @@ QString XMLParser::makeFullPathToFile(QString fn, OBJECT_XML_TYPE oxt)
     }
     QString path = fn;
     if( _savePath.exists(subdir) || _savePath.mkdir(subdir) )
+    {
         path.push_front(subdir);
+        path.push_front(_savePath.path() + "/");
+    }
     return path.contains(".xml", Qt::CaseInsensitive)?path:path+tr(".xml");
 }
 

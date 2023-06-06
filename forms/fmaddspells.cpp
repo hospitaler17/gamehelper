@@ -14,12 +14,16 @@ FmAddSpells::FmAddSpells(Person *person, BaseForm *parent) :
 
 FmAddSpells::~FmAddSpells()
 {
+//    _currentSpell = new Spell();
+    delete _currentSpell;
+    delete model;
     delete ui;
 }
 
 void FmAddSpells::initParams()
 {
     _currentSpell = new Spell();
+    model = new QStandardItemModel(0, TABLE_SPELLS_COLUMN_NAMES_COUNT);
 
     initTable();
 
@@ -27,8 +31,6 @@ void FmAddSpells::initParams()
             this,           SLOT(slotOnItemSelectionChanged(QModelIndex)));
     connect(ui->tableView,  SIGNAL(clicked(QModelIndex)),
             this,           SLOT(slotFrintCurrentSpellOnForm(QModelIndex)));
-
-
 
 }
 
@@ -44,6 +46,16 @@ void FmAddSpells::clearFieldsOnForm()
     ui->le_name->clear();
     ui->sb_cooldawn->setValue(0);
     ui->pte_description->clear();
+}
+
+bool FmAddSpells::checkEmptyFieldsOnForm()
+{
+    bool res = true;
+    if(        ui->le_name->text().trimmed().isEmpty()
+            || ui->pte_description->toPlainText().trimmed().isEmpty()
+            || ui->sb_cooldawn->value() == 0)
+        res = false;
+    return res;
 }
 
 void FmAddSpells::slotOnItemSelectionChanged(QModelIndex index)
@@ -107,15 +119,16 @@ void FmAddSpells::on_pb_add_clicked()
 {
     clearFieldsOnForm();
     ui->tableView->clearSelection();
-    ui->frame_currentEdit->show();
+//    ui->frame_currentEdit->show();
 }
 
 
 void FmAddSpells::on_pb_edit_save_clicked()
 {
+    if( !checkEmptyFieldsOnForm() )
+        return;
+    _currentSpell = new Spell();
     // добавим спелл к персонажу
-    if( !_selectedSpell.isValid() )
-        _currentSpell->regenerateID();
     _currentSpell->setDescription(ui->pte_description->toPlainText());
     _currentSpell->setCooldawn(ui->sb_cooldawn->value());
     _currentSpell->setName(ui->le_name->text());
@@ -124,26 +137,34 @@ void FmAddSpells::on_pb_edit_save_clicked()
     // добавим спелл к таблице
     initTable();
 //    QStandardItem itemID = _currentSpell->ID();
-//    model->appendRow();
+//    model->appendRow();clearSelection
 }
 
 void FmAddSpells::initTable()
 {
-    model = new QStandardItemModel(0, TABLE_SPELLS_COLUMN_NAMES_COUNT);
+
+
+
+    //////////////////////////////////////////////////////////
+    model->clear();
     for(int i = 0; i < _person->getSpells().count(); ++i)
     {
         QList<QStandardItem *> items;
         for(int j = 0; j < TABLE_SPELLS_COLUMN_NAMES_COUNT; ++j)
         {
-            QStandardItem * item = new QStandardItem();
             if(j == TSCN_NAME)
-                item->setData(QVariant(_person->getSpells().at(i)->name()));
+            {
+                QString name = _person->getSpells().at(i)->name();
+                QStandardItem * itemName = new QStandardItem(name);;
+                model->setItem(i, j, itemName);
+            }
             else if(j == TSCN_ID)
-                item->setData(QVariant(_person->getSpells().at(i)->ID()));
-
-            items.append(item);
+            {
+                QString ID = QString::number(_person->getSpells().at(i)->ID());
+                QStandardItem * itemID = new QStandardItem(ID);;
+                model->setItem(i, j, itemID);
+            }
         }
-        model->appendRow(items);
     }
     ui->tableView->setModel(model);
 
@@ -160,11 +181,16 @@ void FmAddSpells::initTable()
     }
     model->setHorizontalHeaderLabels(labels);
 
+    ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    ui->tableView->horizontalHeader()->setStretchLastSection(true);
+    ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
+
     ui->tableView->selectRow(0);
     ui->tableView->clicked(model->index(0,0));
 
-    ui->tableView->hideColumn(TSCN_ID);
+//    ui->tableView->hideColumn(TSCN_ID);
 
-    ui->frame_currentEdit->hide();
+//    ui->frame_currentEdit->hide();
 }
 

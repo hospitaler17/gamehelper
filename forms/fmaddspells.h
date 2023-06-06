@@ -12,7 +12,7 @@
 #include "game/actors//person.h"
 #include "objects/spell.h"
 
-#define TABLE_SPELLS_COLUMN_NAMES_COUNT 3
+#define TABLE_SPELLS_COLUMN_NAMES_COUNT 2
 enum TABLE_SPELLS_COLUMN_NAMES
 {
     TSCN_ID = 0,
@@ -32,7 +32,7 @@ public:
     ~FmAddSpells();
 
 protected:
-    virtual void initParams();
+    void initParams();
 
 private:
     Ui::FmAddSpells *ui;
@@ -45,6 +45,7 @@ private:
     void setCurrentSpell(Spell * spell);
     void loadSpellOnForm(Spell * spell);
     void clearFieldsOnForm();
+    bool checkEmptyFieldsOnForm();
 protected slots:
     void slotOnItemSelectionChanged(QModelIndex index);
     void slotFrintCurrentSpellOnForm(QModelIndex index);
