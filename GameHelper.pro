@@ -29,6 +29,7 @@ INCLUDEPATH += forms \
 
 SOURCES += \
         main.cpp \
+    widgets/scaledpixmap.cpp \
     xmlparser.cpp \
     processor.cpp \
     forms/fmaddperson.cpp \
@@ -51,6 +52,7 @@ SOURCES += \
 
 HEADERS += \
     common.h \
+    widgets/scaledpixmap.h \
     xmlparser.h \
     processor.h \
     forms/fmaddperson.h \

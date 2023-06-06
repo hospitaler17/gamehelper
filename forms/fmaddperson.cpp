@@ -33,7 +33,10 @@ void FmAddPerson::loadPersonAttributsOnForm()
     // main
     ui->le_name->setText(person->name());
     ui->le_class->setText(person->personClass());
+
     ui->le_pic->setText(person->pathToIcon());
+    ui->le_pixmap_person->setScaledPixmap(person->pathToIcon());
+
     ui->cbox_type->setCurrentIndex(person->type());
 
     ui->sb_health->setValue(person->maxHealth());
@@ -129,5 +132,16 @@ void FmAddPerson::on_pb_drop_clicked()
 void FmAddPerson::on_pb_load_exists_clicked()
 {
 
+}
+
+
+void FmAddPerson::on_tb_pic_clicked()
+{
+    QString path = QFileDialog::getOpenFileName(this);
+    if(!path.isEmpty())
+    {
+        ui->le_pic->setText(path);
+        ui->le_pixmap_person->setScaledPixmap(path);
+    }
 }
 
