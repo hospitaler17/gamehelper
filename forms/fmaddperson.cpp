@@ -140,8 +140,8 @@ void FmAddPerson::on_tb_pic_clicked()
     QString path = QFileDialog::getOpenFileName(this);
     if(!path.isEmpty())
     {
-        ui->le_pic->setText(person->pathToIcon());
-        ui->le_pixmap_person->setScaledPixmap(person->pathToIcon());
+        ui->le_pic->setText(path);
+        ui->le_pixmap_person->setScaledPixmap(path);
     }
 }
 

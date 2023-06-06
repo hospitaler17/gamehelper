@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>520</width>
-    <height>833</height>
+    <width>535</width>
+    <height>939</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>2</horstretch>
-       <verstretch>0</verstretch>
+       <verstretch>2</verstretch>
       </sizepolicy>
      </property>
      <property name="title">
@@ -629,7 +629,7 @@
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>2</horstretch>
-       <verstretch>0</verstretch>
+       <verstretch>2</verstretch>
       </sizepolicy>
      </property>
      <property name="title">
@@ -660,7 +660,7 @@
          <bool>true</bool>
         </property>
         <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
+         <enum>QFrame::NoFrame</enum>
         </property>
         <property name="text">
          <string/>
@@ -764,6 +764,12 @@
    </item>
    <item row="1" column="0" colspan="2">
     <widget class="QGroupBox" name="gb_chars">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>1</verstretch>
+      </sizepolicy>
+     </property>
      <property name="title">
       <string>Характеристики</string>
      </property>
@@ -1465,6 +1471,12 @@
    </item>
    <item row="2" column="0" colspan="2">
     <widget class="QFrame" name="frame_buttons_2">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>1</verstretch>
+      </sizepolicy>
+     </property>
      <property name="frameShape">
       <enum>QFrame::Panel</enum>
      </property>
@@ -1516,6 +1528,12 @@
    </item>
    <item row="4" column="0" colspan="2">
     <widget class="QFrame" name="frame_buttons">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>1</verstretch>
+      </sizepolicy>
+     </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
