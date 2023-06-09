@@ -98,13 +98,7 @@ void FmAddPerson::on_pb_load_clicked()
         return;
 
     XMLParser * writer = new XMLParser();
-
     writer->readXmlFile(person, fileName.at(0));
-    for(int i = 0; i < person->getSpells().count(); ++i)
-    {
-
-    }
-
     delete writer;
 
     loadPersonAttributsOnForm();

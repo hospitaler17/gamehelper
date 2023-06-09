@@ -57,6 +57,7 @@ protected slots:
 private slots:
     void on_pb_edit_save_clicked();
     void initTable();
+    void on_pb_load_and_add_file_clicked();
 };
 
 #endif // FMADDSPELLS_H

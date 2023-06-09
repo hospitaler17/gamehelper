@@ -8,12 +8,13 @@
 #include <QFile>
 #include <QFileInfoList>
 #include <QMessageBox>
-#if QT_VERSION > 0x060000
+
+#if QT_VERSION >= QT_VERSION_CHECK(5,10,0)
 #include <QStringView>
-#define XML_NAME(x) QStringView(x)
+#define XML_VIEW_CLASS QStringView
 #else
 #include <QStringRef>
-#define XML_NAME(str) (str)
+#define XML_VIEW_CLASS QString
 #endif
 
 #include "common.h"
@@ -41,6 +42,8 @@ public:
 
     QDir savePath() const;
     void setSavePath(const QDir &savePath);
+
+    static QString getXMLsSubDir(OBJECT_XML_TYPE oxt);
 
 private:
     OBJECT_XML_TYPE _type;

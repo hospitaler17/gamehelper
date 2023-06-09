@@ -26,11 +26,17 @@ bool XMLParser::readXmlFile(Person* person, QString filePath)
     QXmlStreamReader reader;
     reader.setDevice(&file);
     reader.readNext();
+
+    QVector<Spell *> spellsVector;
+
     while( !reader.atEnd() && !reader.hasError() )
     {
         if(reader.isStartElement())
         {
-            if      (reader.name() == XML_NAME(tr("main")))
+            XML_VIEW_CLASS elementName = reader.name();
+            QString name = elementName.toString();
+
+            if      (name == tr("main"))
             {
                 QXmlStreamAttributes main = reader.attributes();
                 person->setID(main.value("id").toInt());
@@ -39,13 +45,13 @@ bool XMLParser::readXmlFile(Person* person, QString filePath)
                 person->setPathToIcon(main.value("path_to_icon").toString());
                 person->setType((PERSON_TYPE) main.value("type").toInt());
             }
-            else if (reader.name() == XML_NAME(tr("current")))
+            else if (name == tr("current"))
             {
                 QXmlStreamAttributes current = reader.attributes();
                 person->setDamage(current.value("damage").toInt());
                 person->setHealth(current.value("health").toInt());
             }
-            else if (reader.name() == XML_NAME(tr("characteristics")))
+            else if (name == tr("characteristics"))
             {
                 QXmlStreamAttributes characteristics = reader.attributes();
                 person->setInitiative(characteristics.value("initiative").toInt());
@@ -57,28 +63,23 @@ bool XMLParser::readXmlFile(Person* person, QString filePath)
 
                 result = true; //NOTE: поставил тут, как специальный раздел для Person
             }
-            else if (reader.name() == XML_NAME(tr("spells")))
+            else if (name == tr("spell"))
             {
-                // не работает
                 QXmlStreamAttributes spells = reader.attributes();
-                QString id = spells.value("id").toString();
-                QVector<Spell *> spellsVector;
-                for(int i = 0; i < spells.count(); ++i)
-                {
-                    Spell * spell = new Spell();
-                    spell->setID(spells.at(i).value().toInt());
+                Spell * spell = new Spell();
+                spell->setID(spells.value("id").toLongLong());
 
-                    if(findSpellByID(spell))
-                        spellsVector.append(spell);
+                if(findSpellByID(spell))
+                    spellsVector.append(spell);
 
-                }
-                person->setSpells(spellsVector);
             }
 
         }
         reader.readNext();
     }
     file.close();
+    person->setSpells(spellsVector);
+
     return result;
 }
 
@@ -124,17 +125,21 @@ bool XMLParser::writeXmlFile(Person *person, QString filename)
     writer.writeAttribute("main_chars",     QString::number(person->mainChars()));
     writer.writeEndElement(); // characteristics
 
+    writer.writeEndElement(); // person
+
     // Способности
     writer.writeStartElement("spells");
+
     for(int i = 0; i < person->getSpells().count(); ++i)
     {
+        writer.writeStartElement("spell");
         writer.writeAttribute("id", QString::number(person->getSpells().at(i)->ID()));
         QString filename = QString::number(person->getSpells().at(i)->ID()) + tr("_") + person->getSpells().at(i)->name();
         writeXmlFile(person->getSpells().at(i), filename);
+        writer.writeEndElement(); // spell
     }
     writer.writeEndElement(); // spells
 
-    writer.writeEndElement(); // person
     writer.writeEndDocument();
 
     file.close();
@@ -144,7 +149,7 @@ bool XMLParser::writeXmlFile(Person *person, QString filename)
 bool XMLParser::readXmlFile(Spell *spell, QString filePath)
 {
     QFile file(filePath);
-    if( !file.exists() || !file.open(QFile::WriteOnly) )
+    if( !file.exists() || !file.open(QFile::ReadOnly) )
     {
         QMessageBox::warning(nullptr,
                              tr("Ошибка файла"),
@@ -161,13 +166,16 @@ bool XMLParser::readXmlFile(Spell *spell, QString filePath)
     {
         if(reader.isStartElement())
         {
-            if      (reader.name() == XML_NAME(tr("main")))
+            XML_VIEW_CLASS elementName = reader.name();
+            QString name = elementName.toString();
+
+            if      (name == tr("main"))
             {
                 QXmlStreamAttributes main = reader.attributes();
                 spell->setID(main.value("id").toInt());
                 spell->setName(main.value("name").toString());
             }
-            else if (reader.name() == XML_NAME(tr("special")))
+            else if (name == tr("special"))
             {
                 QXmlStreamAttributes special = reader.attributes();
                 spell->setDescription(special.value("description").toString());
@@ -251,6 +259,17 @@ bool XMLParser::findSpellByID(Spell * spell)
 
 QString XMLParser::makeFullPathToFile(QString fn, OBJECT_XML_TYPE oxt)
 {
+    QString subdir = getXMLsSubDir(oxt);
+    QString path = fn;
+    if( _savePath.exists(subdir) || _savePath.mkdir(subdir) )
+    {
+        path.push_front(subdir);
+    }
+    return path.contains(".xml", Qt::CaseInsensitive)?path:path+tr(".xml");
+}
+
+QString XMLParser::getXMLsSubDir(OBJECT_XML_TYPE oxt)
+{
     QString subdir;
     switch (oxt) {
     case OXT_PERSON:
@@ -268,12 +287,7 @@ QString XMLParser::makeFullPathToFile(QString fn, OBJECT_XML_TYPE oxt)
     default:
         break;
     }
-    QString path = fn;
-    if( _savePath.exists(subdir) || _savePath.mkdir(subdir) )
-    {
-        path.push_front(subdir);
-        path.push_front(_savePath.path() + "/");
-    }
-    return path.contains(".xml", Qt::CaseInsensitive)?path:path+tr(".xml");
+    subdir.push_front(QString(tr(ROOT_SAVE_PATH) + tr("/")));
+    return subdir;
 }
 

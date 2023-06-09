@@ -13,7 +13,7 @@
 
 // шаблон генератора из мин макс
 
-Q_DECL_UNUSED /*Временно*/ static quint8 generate(QPair<quint8, quint8> pair )  // QPair(min, max) pair
+static quint8 generate(QPair<quint8, quint8> pair )  // QPair(min, max) pair
 {
     quint8 number = __UINT8_MAX__;
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)

@@ -194,3 +194,16 @@ void FmAddSpells::initTable()
 //    ui->frame_currentEdit->hide();
 }
 
+
+void FmAddSpells::on_pb_load_and_add_file_clicked()
+{
+    QString path = QFileDialog::getOpenFileName(this, tr("Добавить способность"), XMLParser::getXMLsSubDir(OXT_SPELL));
+    if(!path.isEmpty() && _currentSpell->readFromXML(path))
+    {
+        _currentSpell = new Spell();
+        _person->addSpell(_currentSpell);
+        initTable();
+    }
+
+}
+
