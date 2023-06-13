@@ -8,6 +8,13 @@
 #include <QFile>
 #include <QFileInfoList>
 #include <QMessageBox>
+#if QT_VERSION > 0x060000
+#include <QStringView>
+#define XML_NAME(x) QStringView(x)
+#else
+#include <QStringRef>
+#define XML_NAME(str) (str)
+#endif
 
 #include "common.h"
 #include "game/actors/person.h"
@@ -15,9 +22,10 @@
 #include "game/maps/map.h"
 #include "objects/spell.h"
 
-class Person;
-class Spell;
-class Map;
+#define ROOT_SAVE_PATH "xml"
+Q_FORWARD_DECLARE_OBJC_CLASS(Spell);
+Q_FORWARD_DECLARE_OBJC_CLASS(Map);
+Q_FORWARD_DECLARE_OBJC_CLASS(Person);
 
 class XMLParser : public QObject
 {

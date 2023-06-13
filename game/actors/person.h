@@ -12,7 +12,7 @@
 #include "common.h"
 #include "xmlparser.h"
 
-
+Q_FORWARD_DECLARE_OBJC_CLASS(Spell);
 
 class Person : public BaseObject
 {
@@ -34,9 +34,6 @@ public:
 
     PERSON_TYPE type() const;
     void setType(const PERSON_TYPE &type);
-
-    QPixmap icon() const; //!> TODO: Возможно этот метод следует перенести в BaseObject т.к. иконки есть у всего.
-    void setIcon(const QPixmap &icon);
 
     QString personClass() const;
     void setPersonClass(const QString &personClass);
