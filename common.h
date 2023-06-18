@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QtGlobal>
 #include <QDateTime>
+#include <QDir>
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 #include <QRandomGenerator>
@@ -52,6 +53,7 @@ Q_DECL_UNUSED static quint8 cube6()
     return generate(qMakePair(1,6));
 }
 
+#define ROOT_SAVE_XMLS_PATH "xml"
 enum OBJECT_XML_TYPE
 {
     OXT_UNDEFINED = 0,
@@ -126,27 +128,6 @@ enum SPELLPROFILE
     SP_CIRCLE
 };
 
-enum STANDART_PROJECT_DIRS
-{
-    SPD_UNDEFINED = -1,
-
-    SPD_ICON = 0,
-
-    SPD_MAP,
-    SPD_PERSON,
-    SPD_SPELL,
-    SPD_ITEM,
-    SPD_EFFECT,
-
-    SPD_BATTLE,
-    SPD_GAME,
-
-    SPD_PLAYER,
-    SPD_BOSS,
-    SPD_MONSTER,
-    SPD_NPC
-};
-
 class Common : public QObject
 {
     Q_OBJECT
@@ -164,25 +145,6 @@ public:
             return tr("Нейтральный персонаж");
         return tr("Неизвестно");
     }
-    static QString getStandartProjectDirs(STANDART_PROJECT_DIRS spd)
-    {
-        if      (spd == SPD_ICON)
-            return tr("./res/icon/");
-        else if (spd == SPD_MAP)
-            return tr("./res/map/");
-        else if (spd == SPD_ITEM)
-            return tr("./res/item/");
-        else if (spd == SPD_EFFECT)
-            return tr("./res/effects/");
-        else if (spd == SPD_PERSON)
-            return tr("./res/person/");
-        else if (spd == SPD_SPELL)
-            return tr("./res/spell/");
-
-        //TODO: Дописать по необходимости стандартные пути
-
-        return tr("./");
-    }
     static QString getPersonCharacteristicDescription(PERSON_CHARACTERISTICS pc)
     {
         if      (pc == PC_STRENGTH)
@@ -197,6 +159,33 @@ public:
             return tr("Харизма");
 
         return tr("Неизвестно");
+    }
+    static QString getXMLsSubDir(OBJECT_XML_TYPE oxt)
+    {
+        QString subdir;
+        switch (oxt) {
+        case OXT_PERSON:
+            subdir = tr("person/");
+            break;
+        case OXT_SPELL:
+            subdir = tr("spell/");
+            break;
+        case OXT_MAP:
+            subdir = tr("map/");
+            break;
+        case OXT_BATTLE:
+            subdir = tr("battle/");
+            break;
+        default:
+            break;
+        }
+        subdir.push_front(QString(tr(ROOT_SAVE_XMLS_PATH) + tr("/")));
+        return subdir;
+    }
+    static QString getCurrentAppPath()
+    {
+        QDir dir;
+        return dir.absolutePath() + tr("/");
     }
 
 };

@@ -2,11 +2,7 @@
 
 XMLParser::XMLParser(QObject *parent) : QObject(parent)
 {
-    if(!_savePath.cd(ROOT_SAVE_PATH))
-    {
-        _savePath.mkpath(ROOT_SAVE_PATH);
-        _savePath.cd(ROOT_SAVE_PATH);
-    }
+
 }
 
 bool XMLParser::readXmlFile(Person* person, QString filePath)
@@ -240,7 +236,9 @@ bool XMLParser::findSpellByID(Spell * spell)
     QString textID = tr("*") + QString::number(spell->ID()) + tr("*");
     QStringList listNameFilters;
     listNameFilters << textID;
-    QFileInfoList fileInfoList = _savePath.entryInfoList(listNameFilters, QDir::Files, QDir::Name);
+    QDir searchDir(_savePath);
+    searchDir.cd(Common::getXMLsSubDir(OXT_SPELL));
+    QFileInfoList fileInfoList = searchDir.entryInfoList(listNameFilters, QDir::Files, QDir::Name);
     if( fileInfoList.isEmpty() )
         return false;
 
@@ -259,35 +257,13 @@ bool XMLParser::findSpellByID(Spell * spell)
 
 QString XMLParser::makeFullPathToFile(QString fn, OBJECT_XML_TYPE oxt)
 {
-    QString subdir = getXMLsSubDir(oxt);
+    QString subdir = Common::getXMLsSubDir(oxt);
     QString path = fn;
-    if( _savePath.exists(subdir) || _savePath.mkdir(subdir) )
+    if( _savePath.mkpath(subdir) )
     {
         path.push_front(subdir);
     }
     return path.contains(".xml", Qt::CaseInsensitive)?path:path+tr(".xml");
 }
 
-QString XMLParser::getXMLsSubDir(OBJECT_XML_TYPE oxt)
-{
-    QString subdir;
-    switch (oxt) {
-    case OXT_PERSON:
-        subdir = tr("person/");
-        break;
-    case OXT_SPELL:
-        subdir = tr("spell/");
-        break;
-    case OXT_MAP:
-        subdir = tr("map/");
-        break;
-    case OXT_BATTLE:
-        subdir = tr("battle/");
-        break;
-    default:
-        break;
-    }
-    subdir.push_front(QString(tr(ROOT_SAVE_PATH) + tr("/")));
-    return subdir;
-}
 

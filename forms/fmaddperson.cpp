@@ -61,6 +61,16 @@ void FmAddPerson::on_pb_spells_clicked()
 
 void FmAddPerson::on_pb_save_clicked()
 {
+    { // copy pic to XML folder
+        QString path = ui->le_pic->text();
+        QFile file(path);
+        QFileInfo fi(path);
+        QString newFileName = Common::getCurrentAppPath() + Common::getXMLsSubDir(OXT_PERSON)
+                + QString::number(person->ID()) + tr("_") + person->name()+ tr(".") + fi.completeSuffix();
+        file.copy(newFileName);
+
+        ui->le_pic->setText(newFileName);
+    }
     // main
     person->setName(ui->le_name->text());
     person->setPersonClass(ui->le_class->text());

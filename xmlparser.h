@@ -23,7 +23,7 @@
 #include "game/maps/map.h"
 #include "objects/spell.h"
 
-#define ROOT_SAVE_PATH "xml"
+#define ROOT_SAVE_XMLS_PATH "xml"
 Q_FORWARD_DECLARE_OBJC_CLASS(Spell);
 Q_FORWARD_DECLARE_OBJC_CLASS(Map);
 Q_FORWARD_DECLARE_OBJC_CLASS(Person);
@@ -43,7 +43,6 @@ public:
     QDir savePath() const;
     void setSavePath(const QDir &savePath);
 
-    static QString getXMLsSubDir(OBJECT_XML_TYPE oxt);
 
 private:
     OBJECT_XML_TYPE _type;

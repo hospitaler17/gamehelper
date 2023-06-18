@@ -119,7 +119,6 @@ void FmAddSpells::on_pb_add_clicked()
 {
     clearFieldsOnForm();
     ui->tableView->clearSelection();
-//    ui->frame_currentEdit->show();
 }
 
 
@@ -142,9 +141,6 @@ void FmAddSpells::on_pb_edit_save_clicked()
 
 void FmAddSpells::initTable()
 {
-
-
-
     //////////////////////////////////////////////////////////
     model->clear();
     for(int i = 0; i < _person->getSpells().count(); ++i)
@@ -188,22 +184,17 @@ void FmAddSpells::initTable()
 
     ui->tableView->selectRow(0);
     ui->tableView->clicked(model->index(0,0));
-
-//    ui->tableView->hideColumn(TSCN_ID);
-
-//    ui->frame_currentEdit->hide();
 }
 
 
 void FmAddSpells::on_pb_load_and_add_file_clicked()
 {
-    QString path = QFileDialog::getOpenFileName(this, tr("Добавить способность"), XMLParser::getXMLsSubDir(OXT_SPELL));
+    QString path = QFileDialog::getOpenFileName(this, tr("Добавить способность"), Common::getXMLsSubDir(OXT_SPELL));
     if(!path.isEmpty() && _currentSpell->readFromXML(path))
     {
         _currentSpell = new Spell();
         _person->addSpell(_currentSpell);
         initTable();
     }
-
 }
 
