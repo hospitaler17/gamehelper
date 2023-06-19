@@ -18,6 +18,7 @@
 class Person;
 class Spell;
 class Map;
+class Battle;
 
 class XMLParser : public QObject
 {

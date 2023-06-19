@@ -25,7 +25,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 INCLUDEPATH += forms \
-                objects
+                objects \
+                game/actors \
+                game/maps \
+                factories
 
 SOURCES += \
         main.cpp \
@@ -48,7 +51,9 @@ SOURCES += \
     game/maps/map.cpp \
     game/actors/monster.cpp \
     game/actors/person.cpp \
-    game/maps/questmap.cpp
+    game/maps/questmap.cpp \
+    game/maps/battlefieldcreator.cpp \
+    factories/monsterfactory.cpp
 
 HEADERS += \
     common.h \
@@ -71,7 +76,9 @@ HEADERS += \
     game/maps/map.h \
     game/actors/monster.h \
     game/actors/person.h \
-    game/maps/questmap.h
+    game/maps/questmap.h \
+    game/maps/battlefieldcreator.h \
+    factories/monsterfactory.h
 
 FORMS += \
     forms/fmaddperson.ui \
