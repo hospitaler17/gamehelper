@@ -7,7 +7,6 @@ XMLParser::XMLParser(QObject *parent) : QObject(parent)
 
 bool XMLParser::readXmlFile(Person* person, QString filePath)
 {
-
     QFile file(filePath);
     if( !file.open(QFile::ReadOnly | QFile::Text) )
     {
@@ -25,7 +24,8 @@ bool XMLParser::readXmlFile(Person* person, QString filePath)
 
     QVector<Spell *> spellsVector;
 
-    while( !reader.atEnd() && !reader.hasError() )
+    while( !reader.atEnd()
+           || !reader.hasError() )
     {
         if(reader.isStartElement())
         {
@@ -67,7 +67,7 @@ bool XMLParser::readXmlFile(Person* person, QString filePath)
 
                 if(findSpellByID(spell))
                     spellsVector.append(spell);
-
+                delete spell;
             }
 
         }
@@ -121,8 +121,6 @@ bool XMLParser::writeXmlFile(Person *person, QString filename)
     writer.writeAttribute("main_chars",     QString::number(person->mainChars()));
     writer.writeEndElement(); // characteristics
 
-    writer.writeEndElement(); // person
-
     // Способности
     writer.writeStartElement("spells");
 
@@ -135,6 +133,9 @@ bool XMLParser::writeXmlFile(Person *person, QString filename)
         writer.writeEndElement(); // spell
     }
     writer.writeEndElement(); // spells
+
+    writer.writeEndElement(); // person
+
 
     writer.writeEndDocument();
 
@@ -233,22 +234,20 @@ void XMLParser::setSavePath(const QDir &savePath)
 
 bool XMLParser::findSpellByID(Spell * spell)
 {
-    QString textID = tr("*") + QString::number(spell->ID()) + tr("*");
+    quint64 ID = spell->ID();
+
+    QString textID = tr("*") + QString::number(ID) + tr("*");
     QStringList listNameFilters;
     listNameFilters << textID;
     QDir searchDir(_savePath);
     searchDir.cd(Common::getXMLsSubDir(OXT_SPELL));
     QFileInfoList fileInfoList = searchDir.entryInfoList(listNameFilters, QDir::Files, QDir::Name);
-    if( fileInfoList.isEmpty() )
-        return false;
 
     for(int i = 0; i < fileInfoList.count(); ++i)
     {
-        Spell *newSpell = new Spell();
-        readXmlFile(newSpell, fileInfoList.at(i).absoluteFilePath());
-        if(newSpell->ID() == spell->ID())
+        if(readXmlFile(spell, fileInfoList.at(i).absoluteFilePath())
+                && spell->ID() == ID)
         {
-            spell = newSpell;
             return true;
         }
     }
