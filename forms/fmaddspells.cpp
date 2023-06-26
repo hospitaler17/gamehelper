@@ -135,8 +135,6 @@ void FmAddSpells::on_pb_edit_save_clicked()
 
     // добавим спелл к таблице
     initTable();
-//    QStandardItem itemID = _currentSpell->ID();
-//    model->appendRow();clearSelection
 }
 
 void FmAddSpells::initTable()

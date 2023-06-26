@@ -82,7 +82,7 @@ protected:
     PERSON_CHARACTERISTICS  _mainChars  = PC_UNDEFINED;
     // ***
 
-    QVector <Spell *> _spells;
+    QList <Spell *> _spells;
 
 signals:
 

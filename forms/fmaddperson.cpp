@@ -66,8 +66,8 @@ void FmAddPerson::on_pb_save_clicked()
         QFile file(path);
         QFileInfo fi(path);
         QString newFileName = Common::getCurrentAppPath() + Common::getXMLsSubDir(OXT_PERSON)
-                + QString::number(person->ID()) + tr("_") + /*person->name()+*/ tr(".") + fi.completeSuffix();
-        bool ok = file.copy(newFileName);
+                + QString::number(person->ID()) + /*tr("_") + person->name()+*/ tr(".") + fi.completeSuffix();
+        file.copy(newFileName);
 
         ui->le_pic->setText(newFileName);
     }
@@ -98,7 +98,7 @@ void FmAddPerson::on_pb_save_clicked()
 
 void FmAddPerson::on_pb_load_clicked()
 {
-    QFileDialog * dialog = new  QFileDialog();
+    QFileDialog * dialog = new  QFileDialog(this, tr("Загрузить персонажа"), Common::getXMLsSubDir(OXT_PERSON));
     dialog->setFileMode(QFileDialog::ExistingFile);
     QStringList fileName;
     if (dialog->exec())
