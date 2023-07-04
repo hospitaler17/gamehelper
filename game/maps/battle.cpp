@@ -10,6 +10,16 @@ Battle::Battle(BaseObject *parent) :
 
 }
 
+void Battle::init(quint8 difficulty, QList<Person *> heroes, bool isBossBattle, QString mapPath)
+{
+    create(difficulty, heroes, _monsters,isBossBattle,mapPath);
+}
+
+void Battle::endOfTurn()
+{
+
+}
+
 void Battle::create(quint8 difficulty, QList<Person*>, QList<Monster*> monsters, bool isBossBattle, QString mapPath)
 {
     _battleField = new BattleField(mapPath);
@@ -64,6 +74,11 @@ void Battle::create(quint8 difficulty, QList<Person*>, QList<Monster*> monsters,
     }
 
 
+}
+
+bool Battle::readFromXML(QString str)
+{
+    return true;
 }
 
 

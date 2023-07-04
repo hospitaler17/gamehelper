@@ -53,7 +53,8 @@ SOURCES += \
     game/actors/person.cpp \
     game/maps/questmap.cpp \
     game/maps/battlefieldcreator.cpp \
-    factories/monsterfactory.cpp
+    factories/monsterfactory.cpp \
+    game/battlegenerator.cpp
 
 HEADERS += \
     common.h \
@@ -78,7 +79,8 @@ HEADERS += \
     game/actors/person.h \
     game/maps/questmap.h \
     game/maps/battlefieldcreator.h \
-    factories/monsterfactory.h
+    factories/monsterfactory.h \
+    game/battlegenerator.h
 
 FORMS += \
     forms/fmaddperson.ui \
