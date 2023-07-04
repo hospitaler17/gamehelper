@@ -26,16 +26,12 @@ void Battle::create(quint8 difficulty, QList<Person*>, QList<Monster*> monsters,
         {
             numberOfMonsters = cube4();
             monsterLvl = 1;
-
-
             break;
         }
         case 2:                  //!> второй уровень сложности от 1 до 6 монстров 1 лвла
         {
-
             numberOfMonsters = cube6();
             monsterLvl = 1;
-
             break;
         }
         case 3:                  //!> второй уровень сложности от 1 до 4 монстров 2 лвла
@@ -62,7 +58,7 @@ void Battle::create(quint8 difficulty, QList<Person*>, QList<Monster*> monsters,
         MonsterFactory* msFactory = new MonsterFactory();
         for (int i =0; i<numberOfMonsters;i++)
         {
-           monsters.append(createRandomMonster(msFactory, monsterLvl, _battleField->getMapZone())); //TODO: Нужен фабричный метод создания монстров
+           monsters.append(createRandomMonster(msFactory, monsterLvl, _battleField->getMapZone()));
         }
 
     }
