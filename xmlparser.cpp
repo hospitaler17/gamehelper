@@ -22,8 +22,6 @@ bool XMLParser::readXmlFile(Person* person, QString filePath)
     reader.setDevice(&file);
     reader.readNext();
 
-    QVector<Spell *> spellsVector;
-
     while( !reader.atEnd()
            || !reader.hasError() )
     {
@@ -66,7 +64,7 @@ bool XMLParser::readXmlFile(Person* person, QString filePath)
                 spell->setID(spells.value("id").toLongLong());
 
                 if(findSpellByID(spell))
-                    spellsVector.append(spell);
+                    person->addSpell(spell);
                 delete spell;
             }
 
@@ -74,7 +72,6 @@ bool XMLParser::readXmlFile(Person* person, QString filePath)
         reader.readNext();
     }
     file.close();
-    person->setSpells(spellsVector);
 
     return result;
 }

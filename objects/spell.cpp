@@ -5,6 +5,18 @@ Spell::Spell(BaseObject *parent) : BaseObject(parent)
     setObjectType(OXT_SPELL);
 }
 
+Spell::Spell(const Spell &spell, BaseObject *parent) : BaseObject(parent)
+{
+    setObjectType(OXT_SPELL);
+
+    this->setID(spell.ID());
+    this->setName(spell.name());
+    this->setIcon(spell.icon());
+    this->setPathToIcon(spell.pathToIcon());
+    this->setCooldawn(spell.cooldawn());
+    this->setDescription(spell.description());
+}
+
 QString Spell::description() const
 {
     return _description;

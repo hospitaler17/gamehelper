@@ -30,7 +30,7 @@ void FmAddSpells::initParams()
     connect(ui->tableView,  SIGNAL(clicked(QModelIndex)),
             this,           SLOT(slotOnItemSelectionChanged(QModelIndex)));
     connect(ui->tableView,  SIGNAL(clicked(QModelIndex)),
-            this,           SLOT(slotFrintCurrentSpellOnForm(QModelIndex)));
+            this,           SLOT(slotPrintCurrentSpellOnForm(QModelIndex)));
 
 }
 
@@ -63,7 +63,7 @@ void FmAddSpells::slotOnItemSelectionChanged(QModelIndex index)
     _selectedSpell = index;
 }
 
-void FmAddSpells::slotFrintCurrentSpellOnForm(QModelIndex index)
+void FmAddSpells::slotPrintCurrentSpellOnForm(QModelIndex index)
 {
     quint64 ID = model->data(model->index(index.row(), TSCN_ID)).value<quint64>();
 
@@ -101,8 +101,7 @@ void FmAddSpells::on_pb_remove_clicked()
             model->removeRow(_selectedSpell.row());
 
             delete _person->getSpells().at(i);
-            _person->getSpells().removeAt(i);
-
+            _person->removeSpellAt(i);
             return;
         }
     }
@@ -188,9 +187,9 @@ void FmAddSpells::initTable()
 void FmAddSpells::on_pb_load_and_add_file_clicked()
 {
     QString path = QFileDialog::getOpenFileName(this, tr("Добавить способность"), Common::getXMLsSubDir(OXT_SPELL));
+    _currentSpell = new Spell();
     if(!path.isEmpty() && _currentSpell->readFromXML(path))
     {
-        _currentSpell = new Spell();
         _person->addSpell(_currentSpell);
         initTable();
     }

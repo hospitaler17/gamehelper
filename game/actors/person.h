@@ -50,6 +50,8 @@ public:
     QVector<Spell *> getSpells() ;
     void setSpells(QVector<Spell *> value);
     void addSpell(Spell * spell);
+    void removeSpellAt(quint16 index);
+
 
     qint16 strength() const;
     void setStrength(const qint16 &strength);
@@ -63,7 +65,6 @@ protected:
 
     // COMMON
     QString _personClass;
-
     PERSON_TYPE _type = PT_UNDEFINED;
     // ***
 
@@ -82,7 +83,7 @@ protected:
     PERSON_CHARACTERISTICS  _mainChars  = PC_UNDEFINED;
     // ***
 
-    QList <Spell *> _spells;
+    QVector <Spell *> _spells;
 
 signals:
 

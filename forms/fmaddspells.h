@@ -48,7 +48,7 @@ private:
     bool checkEmptyFieldsOnForm();
 protected slots:
     void slotOnItemSelectionChanged(QModelIndex index);
-    void slotFrintCurrentSpellOnForm(QModelIndex index);
+    void slotPrintCurrentSpellOnForm(QModelIndex index);
 
     void on_pb_save_and_exit_clicked();
     void on_pb_remove_clicked();

@@ -109,7 +109,14 @@ void Person::setSpells(QVector<Spell*> value)
 
 void Person::addSpell(Spell *spell)
 {
-    _spells.append(spell);
+    Spell * newSpell = new Spell(*spell);
+    _spells.append(newSpell);
+}
+
+void Person::removeSpellAt(quint16 index)
+{
+    if( index < _spells.count() )
+        _spells.removeAt(index);
 }
 
 qint16 Person::strength() const

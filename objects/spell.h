@@ -37,6 +37,7 @@ public:
 
 
     explicit Spell(BaseObject *parent = 0);
+    explicit Spell(const Spell &spell, BaseObject *parent = 0);
 
 
 
