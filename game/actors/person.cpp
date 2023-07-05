@@ -127,6 +127,21 @@ void Person::setAgility(const qint16 &agility)
     _agility = agility;
 }
 
+quint8 Person::getLvl() const
+{
+  return _level;
+}
+
+void Person::setLvl(const quint8 &lvl)
+{
+    _level = lvl;
+}
+
+void Person::lvlUp()
+{
+    _level++;
+}
+
 bool Person::readFromXML(QString path)
 {
     XMLParser * parser = new XMLParser();

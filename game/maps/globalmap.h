@@ -1,11 +1,11 @@
 #ifndef GLOBALMAP_H
 #define GLOBALMAP_H
+#include "map.h"
 
-
-class GlobalMap
+class GlobalMap : public Map
 {
 public:
-    GlobalMap();
+    explicit GlobalMap();
 };
 
 #endif // GLOBALMAP_H

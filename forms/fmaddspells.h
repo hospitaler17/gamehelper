@@ -8,7 +8,7 @@
 #include <QStandardItemModel>
 
 #include "forms/baseform.h"
-#include "game/actors//person.h"
+#include "game/actors/person.h"
 #include "objects/spell.h"
 
 #define TABLE_SPELLS_COLUMN_NAMES_COUNT 3

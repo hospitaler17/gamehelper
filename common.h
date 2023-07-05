@@ -26,6 +26,8 @@ Q_DECL_UNUSED /*Временно*/ static quint8 generate(QPair<quint8, quint8> 
     return number;
 }
 
+
+
 static quint8 cube20()
 {
     return generate(qMakePair(1,20));
@@ -145,6 +147,37 @@ enum STANDART_PROJECT_DIRS
     SPD_BOSS,
     SPD_MONSTER,
     SPD_NPC
+};
+
+// typedef quint8 MONSTER_TYPE;  //read from xml or qpair <lvl, type>
+enum MONSTER_TYPE : quint16
+{
+    MT_GOBLIN   = 101, //!> ID / 100 - lvl, ID % 100 - num(true ID inside lvl)
+    MT_SLIME    = 102,
+    MT_BOAR     = 103,
+    MT_WOLF     = 104,
+    MT_GOLEM    = 201,
+    MT_BAT      = 202,
+    MT_SKELETON = 203,
+    MT_CRAWLER  = 204,
+
+    //!> BOSSES
+    BT_GOBLIN_KING = 301,
+    BT_STONE_GUARD = 302,
+    BT_GREAT_WYRM  = 401,
+    BT_IFRIT       = 402,
+    BT_NIGHTMARE_UNICORN = 501
+};
+
+enum MAP_ZONE
+{
+    MZ_PLAINS,
+    MZ_SWAMP,
+    MZ_FOREST,
+    MZ_CAVES,
+    MZ_RUINS,
+    MZ_MOUNTAINS,
+    MZ_CASTLE
 };
 
 class Common : public QObject
