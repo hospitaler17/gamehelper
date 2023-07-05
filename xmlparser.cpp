@@ -2,6 +2,11 @@
 
 XMLParser::XMLParser(QObject *parent) : QObject(parent)
 {
+    if(!_savePath.cd(ROOT_SAVE_PATH))
+    {
+        _savePath.mkpath(ROOT_SAVE_PATH);
+        _savePath.cd(ROOT_SAVE_PATH);
+    }
 }
 
 bool XMLParser::readXmlFile(Person* person, QString filePath)
@@ -25,7 +30,7 @@ bool XMLParser::readXmlFile(Person* person, QString filePath)
     {
         if(reader.isStartElement())
         {
-            if      (reader.name() == "main")
+            if      (reader.name() == XML_NAME(tr("main")))
             {
                 QXmlStreamAttributes main = reader.attributes();
                 person->setID(main.value("id").toInt());
@@ -34,13 +39,13 @@ bool XMLParser::readXmlFile(Person* person, QString filePath)
                 person->setPathToIcon(main.value("path_to_icon").toString());
                 person->setType((PERSON_TYPE) main.value("type").toInt());
             }
-            else if (reader.name() == "current")
+            else if (reader.name() == XML_NAME(tr("current")))
             {
                 QXmlStreamAttributes current = reader.attributes();
                 person->setDamage(current.value("damage").toInt());
                 person->setHealth(current.value("health").toInt());
             }
-            else if (reader.name() == "characteristics")
+            else if (reader.name() == XML_NAME(tr("characteristics")))
             {
                 QXmlStreamAttributes characteristics = reader.attributes();
                 person->setInitiative(characteristics.value("initiative").toInt());
@@ -52,7 +57,7 @@ bool XMLParser::readXmlFile(Person* person, QString filePath)
 
                 result = true; //NOTE: поставил тут, как специальный раздел для Person
             }
-            else if (reader.name() == "spells")
+            else if (reader.name() == XML_NAME(tr("spells")))
             {
                 QXmlStreamAttributes spells = reader.attributes();
                 QVector<Spell *> spellsVector;
@@ -154,13 +159,13 @@ bool XMLParser::readXmlFile(Spell *spell, QString filePath)
     {
         if(reader.isStartElement())
         {
-            if      (reader.name() == "main")
+            if      (reader.name() == XML_NAME(tr("main")))
             {
                 QXmlStreamAttributes main = reader.attributes();
                 spell->setID(main.value("id").toInt());
                 spell->setName(main.value("name").toString());
             }
-            else if (reader.name() == "special")
+            else if (reader.name() == XML_NAME(tr("special")))
             {
                 QXmlStreamAttributes special = reader.attributes();
                 spell->setDescription(special.value("description").toString());
@@ -262,9 +267,8 @@ QString XMLParser::makeFullPathToFile(QString fn, OBJECT_XML_TYPE oxt)
     default:
         break;
     }
-    QDir dir;
     QString path = fn;
-    if( dir.exists(subdir) || dir.mkdir(subdir) )
+    if( _savePath.exists(subdir) || _savePath.mkdir(subdir) )
         path.push_front(subdir);
     return path.contains(".xml", Qt::CaseInsensitive)?path:path+tr(".xml");
 }

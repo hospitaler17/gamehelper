@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QDateTime>
 
+#include "xmlparser.h"
 #include "objects/baseobject.h"
 #include "common.h"
 #include "effect.h"

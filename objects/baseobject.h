@@ -41,6 +41,7 @@ protected:
     QPixmap _icon;
     QString _pathToIcon;
 
+    quint64 regenerateID();
 private:
     void init();
 signals:

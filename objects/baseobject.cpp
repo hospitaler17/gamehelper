@@ -55,10 +55,20 @@ void BaseObject::setPathToIcon(const QString &newPathToIcon)
     _pathToIcon = newPathToIcon;
 }
 
+quint64 BaseObject::regenerateID()
+{
+#if QT_VERSION < QT_VERSION_CHECK(5, 8, 0) // 0xMMNNPP (MM = major, NN = minor, PP = patch)
+    _ID = QDateTime::currentDateTime().toTime_t();
+#else
+    _ID = QDateTime::currentDateTime().toSecsSinceEpoch();
+#endif
+    return _ID;
+}
+
 void BaseObject::init()
 {
-    if(QT_VERSION < 0x060000) // 0xMMNNPP (MM = major, NN = minor, PP = patch)
-        _ID = QDateTime::currentDateTime().toTime_t();
+    regenerateID();
+
     _name = "{name}";
     _objectType = OXT_UNDEFINED;
     _pathToIcon = Common::getStandartProjectDirs(SPD_UNDEFINED);

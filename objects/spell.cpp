@@ -40,7 +40,7 @@ Spell::CastResult Spell::cast()
 
 bool Spell::readFromXML(QString path)
 {
-    Q_UNUSED(path);
-
-    return false;
+    XMLParser * parser = new XMLParser();
+    bool res = parser->readXmlFile(this, path);
+    return res;
 }
