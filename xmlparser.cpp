@@ -63,7 +63,7 @@ bool XMLParser::readXmlFile(Person* person, QString filePath)
                 Spell * spell = new Spell();
                 spell->setID(spells.value("id").toLongLong());
 
-                if(findSpellByID(spell))
+                if(findXMLByID(spell))
                     person->addSpell(spell);
                 delete spell;
             }
@@ -229,28 +229,6 @@ void XMLParser::setSavePath(const QDir &savePath)
     _savePath = savePath;
 }
 
-bool XMLParser::findSpellByID(Spell * spell)
-{
-    quint64 ID = spell->ID();
-
-    QString textID = tr("*") + QString::number(ID) + tr("*");
-    QStringList listNameFilters;
-    listNameFilters << textID;
-    QDir searchDir(_savePath);
-    searchDir.cd(Common::getXMLsSubDir(OXT_SPELL));
-    QFileInfoList fileInfoList = searchDir.entryInfoList(listNameFilters, QDir::Files, QDir::Name);
-
-    for(int i = 0; i < fileInfoList.count(); ++i)
-    {
-        if(readXmlFile(spell, fileInfoList.at(i).absoluteFilePath())
-                && spell->ID() == ID)
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
 QString XMLParser::makeFullPathToFile(QString fn, OBJECT_XML_TYPE oxt)
 {
     QString subdir = Common::getXMLsSubDir(oxt);
@@ -263,3 +241,26 @@ QString XMLParser::makeFullPathToFile(QString fn, OBJECT_XML_TYPE oxt)
 }
 
 
+
+template<typename T>
+bool XMLParser::findXMLByID(T *object)
+{
+    quint64 ID = object->ID();
+
+    QString filterID = tr("*") + QString::number(ID) + tr("*");
+    QStringList listNameFilters;
+    listNameFilters << filterID;
+    QDir searchDir(_savePath);
+    searchDir.cd(Common::getXMLsSubDir(object->objectType()));
+    QFileInfoList fileInfoList = searchDir.entryInfoList(listNameFilters, QDir::Files, QDir::Name);
+
+    for(int i = 0; i < fileInfoList.count(); ++i)
+    {
+        if(readXmlFile(object, fileInfoList.at(i).absoluteFilePath())
+            && object->ID() == ID)
+        {
+            return true;
+        }
+    }
+    return false;
+}
