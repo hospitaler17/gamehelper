@@ -8,12 +8,13 @@
 #include <QFile>
 #include <QFileInfoList>
 #include <QMessageBox>
-#if QT_VERSION > 0x060000
+
+#if QT_VERSION >= QT_VERSION_CHECK(5,10,0)
 #include <QStringView>
-#define XML_NAME(x) QStringView(x)
+#define XML_VIEW_CLASS QStringView
 #else
 #include <QStringRef>
-#define XML_NAME(str) (str)
+#define XML_VIEW_CLASS QString
 #endif
 
 #include "common.h"
@@ -22,7 +23,7 @@
 #include "game/maps/map.h"
 #include "objects/spell.h"
 
-#define ROOT_SAVE_PATH "xml"
+#define ROOT_SAVE_XMLS_PATH "xml"
 Q_FORWARD_DECLARE_OBJC_CLASS(Spell);
 Q_FORWARD_DECLARE_OBJC_CLASS(Map);
 Q_FORWARD_DECLARE_OBJC_CLASS(Person);
@@ -43,12 +44,15 @@ public:
     QDir savePath() const;
     void setSavePath(const QDir &savePath);
 
+
 private:
     OBJECT_XML_TYPE _type;
 
     QDir _savePath;
 
-    bool findSpellByID(Spell *spell);
+    template<typename T>
+    bool findXMLByID(T * object);
+
     QString makeFullPathToFile(QString fn, OBJECT_XML_TYPE oxt = OXT_UNDEFINED);
 signals:
 

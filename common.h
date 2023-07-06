@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QtGlobal>
 #include <QDateTime>
+#include <QDir>
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 #include <QRandomGenerator>
@@ -13,7 +14,7 @@
 
 // шаблон генератора из мин макс
 
-Q_DECL_UNUSED /*Временно*/ static quint8 generate(QPair<quint8, quint8> pair )  // QPair(min, max) pair
+static quint8 generate(QPair<quint8, quint8> pair )  // QPair(min, max) pair
 {
     quint8 number = __UINT8_MAX__;
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
@@ -26,34 +27,33 @@ Q_DECL_UNUSED /*Временно*/ static quint8 generate(QPair<quint8, quint8> 
     return number;
 }
 
-
-
-static quint8 cube20()
+Q_DECL_UNUSED static quint8 cube20()
 {
     return generate(qMakePair(1,20));
 }
-static quint8 cube10()
+Q_DECL_UNUSED static quint8 cube10()
 {
     return generate(qMakePair(1,10));
 }
-static quint8 cube12()
+Q_DECL_UNUSED static quint8 cube12()
 {
     return generate(qMakePair(1,12));
 }
-static quint8 cube8()
+Q_DECL_UNUSED static quint8 cube8()
 {
     return generate(qMakePair(1,8));
 }
-static quint8 cube4()
+Q_DECL_UNUSED static quint8 cube4()
 {
     return generate(qMakePair(1,4));
 }
 
-static quint8 cube6()
+Q_DECL_UNUSED static quint8 cube6()
 {
     return generate(qMakePair(1,6));
 }
 
+#define ROOT_SAVE_XMLS_PATH "xml"
 enum OBJECT_XML_TYPE
 {
     OXT_UNDEFINED = 0,
@@ -197,25 +197,6 @@ public:
             return tr("Нейтральный персонаж");
         return tr("Неизвестно");
     }
-    static QString getStandartProjectDirs(STANDART_PROJECT_DIRS spd)
-    {
-        if      (spd == SPD_ICON)
-            return tr("./res/icon/");
-        else if (spd == SPD_MAP)
-            return tr("./res/map/");
-        else if (spd == SPD_ITEM)
-            return tr("./res/item/");
-        else if (spd == SPD_EFFECT)
-            return tr("./res/effects/");
-        else if (spd == SPD_PERSON)
-            return tr("./res/person/");
-        else if (spd == SPD_SPELL)
-            return tr("./res/spell/");
-
-        //TODO: Дописать по необходимости стандартные пути
-
-        return tr("./");
-    }
     static QString getPersonCharacteristicDescription(PERSON_CHARACTERISTICS pc)
     {
         if      (pc == PC_STRENGTH)
@@ -230,6 +211,33 @@ public:
             return tr("Харизма");
 
         return tr("Неизвестно");
+    }
+    static QString getXMLsSubDir(OBJECT_XML_TYPE oxt)
+    {
+        QString subdir;
+        switch (oxt) {
+        case OXT_PERSON:
+            subdir = tr("person/");
+            break;
+        case OXT_SPELL:
+            subdir = tr("spell/");
+            break;
+        case OXT_MAP:
+            subdir = tr("map/");
+            break;
+        case OXT_BATTLE:
+            subdir = tr("battle/");
+            break;
+        default:
+            break;
+        }
+        subdir.push_front(QString(tr(ROOT_SAVE_XMLS_PATH) + tr("/")));
+        return subdir;
+    }
+    static QString getCurrentAppPath()
+    {
+        QDir dir;
+        return dir.absolutePath() + tr("/");
     }
 
 };

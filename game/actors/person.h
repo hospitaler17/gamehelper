@@ -49,6 +49,9 @@ public:
 
     QVector<Spell *> getSpells() ;
     void setSpells(QVector<Spell *> value);
+    void addSpell(Spell * spell);
+    void removeSpellAt(quint16 index);
+
 
     qint16 strength() const;
     void setStrength(const qint16 &strength);
@@ -66,6 +69,7 @@ protected:
 
     // COMMON
     QString _personClass;
+
 
     quint8 _level;
 

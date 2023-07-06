@@ -26,11 +26,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 INCLUDEPATH += forms \
                 objects \
+                widgets \
                 game/actors \
                 game/maps \
                 factories
 
 SOURCES += \
+    game/actors/boss.cpp \
+    game/actors/player.cpp \
         main.cpp \
     widgets/scaledpixmap.cpp \
     xmlparser.cpp \
@@ -59,6 +62,8 @@ SOURCES += \
 
 HEADERS += \
     common.h \
+    game/actors/boss.h \
+    game/actors/player.h \
     widgets/scaledpixmap.h \
     xmlparser.h \
     processor.h \
