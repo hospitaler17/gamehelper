@@ -7,11 +7,12 @@
 
 #include "forms/baseform.h"
 #include "forms/fmaddspells.h"
-#include "game/actors//person.h"
+#include "game/actors/person.h"
 #include "objects/spell.h"
 #include "widgets/scaledpixmap.h"
 
 #include "xmlparser.h"
+
 
 namespace Ui {
 class FmAddPerson;

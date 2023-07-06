@@ -26,7 +26,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 INCLUDEPATH += forms \
                 objects \
-                widgets
+                widgets \
+                game/actors \
+                game/maps \
+                factories
 
 SOURCES += \
     game/actors/boss.cpp \
@@ -51,7 +54,11 @@ SOURCES += \
     game/maps/battlefield.cpp \
     game/maps/map.cpp \
     game/actors/monster.cpp \
-    game/actors/person.cpp
+    game/actors/person.cpp \
+    game/maps/questmap.cpp \
+    game/maps/battlefieldcreator.cpp \
+    factories/monsterfactory.cpp \
+    game/battlegenerator.cpp
 
 HEADERS += \
     common.h \
@@ -76,7 +83,11 @@ HEADERS += \
     game/maps/battlefield.h \
     game/maps/map.h \
     game/actors/monster.h \
-    game/actors/person.h
+    game/actors/person.h \
+    game/maps/questmap.h \
+    game/maps/battlefieldcreator.h \
+    factories/monsterfactory.h \
+    game/battlegenerator.h
 
 FORMS += \
     forms/fmaddperson.ui \

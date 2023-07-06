@@ -59,12 +59,20 @@ public:
     qint16 agility() const;
     void setAgility(const qint16 &agility);
 
+    quint8 getLvl() const;
+    void setLvl(const quint8 &lvl);
+    void lvlUp();
+
     bool readFromXML(QString path);
 
 protected:
 
     // COMMON
     QString _personClass;
+
+
+    quint8 _level;
+
     PERSON_TYPE _type = PT_UNDEFINED;
     // ***
 

@@ -14,8 +14,11 @@ public:
 
     bool readFromXML(QString path);
 
-private:
 
+
+protected:
+
+     void LoadPicture(QString path);
 //    QRect mapSquere;
 
 signals:

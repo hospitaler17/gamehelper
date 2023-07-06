@@ -1,12 +1,16 @@
 #ifndef MONSTER_H
 #define MONSTER_H
 
+#include "QObject"
 #include "person.h"
 #include "item.h"
+
+
 class Monster : public Person
 {
+    Q_OBJECT
 public:
-    Monster();
+    explicit Monster();
 
 protected:
 
@@ -14,7 +18,7 @@ protected:
 
     QList<Item> loot;
 
-    virtual void generateLoot() =0;
+//    virtual void generateLoot() =0;
 };
 
 #endif // MONSTER_H
