@@ -434,7 +434,7 @@
          <item>
           <widget class="QPushButton" name="pb_edit_save">
            <property name="text">
-            <string>Сохранить</string>
+            <string>Добавить</string>
            </property>
           </widget>
          </item>

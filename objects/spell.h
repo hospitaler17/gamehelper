@@ -37,6 +37,7 @@ public:
 
 
     explicit Spell(BaseObject *parent = 0);
+    explicit Spell(const Spell &spell, BaseObject *parent = 0);
 
 
 
@@ -70,9 +71,6 @@ protected:
 
     QHash<QPair<quint8, quint8>,quint8> _area; //!> Область применения скила  QPair это точка
     DIRECTIONSIDE _direction; //!> Направления применения навыка
-
-
-
 
 
 

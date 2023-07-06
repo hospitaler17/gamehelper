@@ -2,16 +2,11 @@
 
 XMLParser::XMLParser(QObject *parent) : QObject(parent)
 {
-    if(!_savePath.cd(ROOT_SAVE_PATH))
-    {
-        _savePath.mkpath(ROOT_SAVE_PATH);
-        _savePath.cd(ROOT_SAVE_PATH);
-    }
+
 }
 
 bool XMLParser::readXmlFile(Person* person, QString filePath)
 {
-
     QFile file(filePath);
     if( !file.open(QFile::ReadOnly | QFile::Text) )
     {
@@ -26,11 +21,16 @@ bool XMLParser::readXmlFile(Person* person, QString filePath)
     QXmlStreamReader reader;
     reader.setDevice(&file);
     reader.readNext();
-    while( !reader.atEnd() && !reader.hasError() )
+
+    while( !reader.atEnd()
+           || !reader.hasError() )
     {
         if(reader.isStartElement())
         {
-            if      (reader.name() == XML_NAME(tr("main")))
+            XML_VIEW_CLASS elementName = reader.name();
+            QString name = elementName.toString();
+
+            if      (name == tr("main"))
             {
                 QXmlStreamAttributes main = reader.attributes();
                 person->setID(main.value("id").toInt());
@@ -39,13 +39,13 @@ bool XMLParser::readXmlFile(Person* person, QString filePath)
                 person->setPathToIcon(main.value("path_to_icon").toString());
                 person->setType((PERSON_TYPE) main.value("type").toInt());
             }
-            else if (reader.name() == XML_NAME(tr("current")))
+            else if (name == tr("current"))
             {
                 QXmlStreamAttributes current = reader.attributes();
                 person->setDamage(current.value("damage").toInt());
                 person->setHealth(current.value("health").toInt());
             }
-            else if (reader.name() == XML_NAME(tr("characteristics")))
+            else if (name == tr("characteristics"))
             {
                 QXmlStreamAttributes characteristics = reader.attributes();
                 person->setInitiative(characteristics.value("initiative").toInt());
@@ -57,26 +57,22 @@ bool XMLParser::readXmlFile(Person* person, QString filePath)
 
                 result = true; //NOTE: поставил тут, как специальный раздел для Person
             }
-            else if (reader.name() == XML_NAME(tr("spells")))
+            else if (name == tr("spell"))
             {
                 QXmlStreamAttributes spells = reader.attributes();
-                QVector<Spell *> spellsVector;
-                for(int i = 0; i < spells.count(); ++i)
-                {
-                    Spell * spell = new Spell();
-                    spell->setID(spells.at(i).value().toInt());
+                Spell * spell = new Spell();
+                spell->setID(spells.value("id").toLongLong());
 
-                    if(findSpellByID(spell))
-                        spellsVector.append(spell);
-
-                }
-                person->setSpells(spellsVector);
+                if(findSpellByID(spell))
+                    person->addSpell(spell);
+                delete spell;
             }
 
         }
         reader.readNext();
     }
     file.close();
+
     return result;
 }
 
@@ -124,15 +120,20 @@ bool XMLParser::writeXmlFile(Person *person, QString filename)
 
     // Способности
     writer.writeStartElement("spells");
+
     for(int i = 0; i < person->getSpells().count(); ++i)
     {
+        writer.writeStartElement("spell");
         writer.writeAttribute("id", QString::number(person->getSpells().at(i)->ID()));
         QString filename = QString::number(person->getSpells().at(i)->ID()) + tr("_") + person->getSpells().at(i)->name();
         writeXmlFile(person->getSpells().at(i), filename);
+        writer.writeEndElement(); // spell
     }
     writer.writeEndElement(); // spells
 
     writer.writeEndElement(); // person
+
+
     writer.writeEndDocument();
 
     file.close();
@@ -142,7 +143,7 @@ bool XMLParser::writeXmlFile(Person *person, QString filename)
 bool XMLParser::readXmlFile(Spell *spell, QString filePath)
 {
     QFile file(filePath);
-    if( !file.exists() || !file.open(QFile::WriteOnly) )
+    if( !file.exists() || !file.open(QFile::ReadOnly) )
     {
         QMessageBox::warning(nullptr,
                              tr("Ошибка файла"),
@@ -159,13 +160,16 @@ bool XMLParser::readXmlFile(Spell *spell, QString filePath)
     {
         if(reader.isStartElement())
         {
-            if      (reader.name() == XML_NAME(tr("main")))
+            XML_VIEW_CLASS elementName = reader.name();
+            QString name = elementName.toString();
+
+            if      (name == tr("main"))
             {
                 QXmlStreamAttributes main = reader.attributes();
                 spell->setID(main.value("id").toInt());
                 spell->setName(main.value("name").toString());
             }
-            else if (reader.name() == XML_NAME(tr("special")))
+            else if (name == tr("special"))
             {
                 QXmlStreamAttributes special = reader.attributes();
                 spell->setDescription(special.value("description").toString());
@@ -183,8 +187,7 @@ bool XMLParser::readXmlFile(Spell *spell, QString filePath)
 bool XMLParser::writeXmlFile(Spell *spell, QString filename)
 {
     QFile file(makeFullPathToFile(filename, spell->objectType()));
-    if( !file.exists()
-        ||  !file.open(QFile::WriteOnly) )
+    if( !file.open(QFile::WriteOnly) )
     {
         QMessageBox::warning(nullptr,
                              tr("Ошибка файла"),
@@ -228,20 +231,20 @@ void XMLParser::setSavePath(const QDir &savePath)
 
 bool XMLParser::findSpellByID(Spell * spell)
 {
-    QString textID = tr("*") + QString::number(spell->ID()) + tr("*");
+    quint64 ID = spell->ID();
+
+    QString textID = tr("*") + QString::number(ID) + tr("*");
     QStringList listNameFilters;
     listNameFilters << textID;
-    QFileInfoList fileInfoList = _savePath.entryInfoList(listNameFilters, QDir::Files, QDir::Name);
-    if( fileInfoList.isEmpty() )
-        return false;
+    QDir searchDir(_savePath);
+    searchDir.cd(Common::getXMLsSubDir(OXT_SPELL));
+    QFileInfoList fileInfoList = searchDir.entryInfoList(listNameFilters, QDir::Files, QDir::Name);
 
     for(int i = 0; i < fileInfoList.count(); ++i)
     {
-        Spell *newSpell = new Spell();
-        readXmlFile(newSpell, fileInfoList.at(i).absoluteFilePath());
-        if(newSpell->ID() == spell->ID())
+        if(readXmlFile(spell, fileInfoList.at(i).absoluteFilePath())
+                && spell->ID() == ID)
         {
-            spell = newSpell;
             return true;
         }
     }
@@ -250,26 +253,13 @@ bool XMLParser::findSpellByID(Spell * spell)
 
 QString XMLParser::makeFullPathToFile(QString fn, OBJECT_XML_TYPE oxt)
 {
-    QString subdir;
-    switch (oxt) {
-    case OXT_PERSON:
-        subdir = tr("person/");
-        break;
-    case OXT_SPELL:
-        subdir = tr("spell/");
-        break;
-    case OXT_MAP:
-        subdir = tr("map/");
-        break;
-    case OXT_BATTLE:
-        subdir = tr("battle/");
-        break;
-    default:
-        break;
-    }
+    QString subdir = Common::getXMLsSubDir(oxt);
     QString path = fn;
-    if( _savePath.exists(subdir) || _savePath.mkdir(subdir) )
+    if( _savePath.mkpath(subdir) )
+    {
         path.push_front(subdir);
+    }
     return path.contains(".xml", Qt::CaseInsensitive)?path:path+tr(".xml");
 }
+
 

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QObject>
 #include <QWidget>
+#include <QFileDialog>
 #include <QDebug>
 
 class BaseForm : public QWidget

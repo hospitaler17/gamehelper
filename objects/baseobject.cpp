@@ -71,5 +71,5 @@ void BaseObject::init()
 
     _name = "{name}";
     _objectType = OXT_UNDEFINED;
-    _pathToIcon = Common::getStandartProjectDirs(SPD_UNDEFINED);
+    _pathToIcon = Common::getXMLsSubDir(_objectType);
 }

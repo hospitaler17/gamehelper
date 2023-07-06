@@ -30,7 +30,7 @@ public:
     QString pathToIcon() const;
     void setPathToIcon(const QString &newPathToIcon);
 
-
+    quint64 regenerateID();
 
 //    virtual void endOfTurn() = 0;
 protected:
@@ -41,7 +41,7 @@ protected:
     QPixmap _icon;
     QString _pathToIcon;
 
-    quint64 regenerateID();
+
 private:
     void init();
 signals:
