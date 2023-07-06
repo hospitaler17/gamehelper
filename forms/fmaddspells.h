@@ -19,6 +19,14 @@ enum TABLE_SPELLS_COLUMN_NAMES
     TSCN_NAME = 1
 };
 
+
+enum MODE
+{
+    MODE_NONE = 0,
+    MODE_EDIT = 1,
+    MODE_CREATE = 2
+};
+
 namespace Ui {
 class FmAddSpells;
 }
@@ -40,7 +48,10 @@ private:
     Person * _person;
     Spell * _currentSpell;
     QStandardItemModel * model;
+
     QModelIndex _selectedSpell;
+
+    MODE _workMode = MODE_NONE;
 
     void setCurrentSpell(Spell * spell);
     void loadSpellOnForm(Spell * spell);
@@ -58,6 +69,9 @@ private slots:
     void on_pb_edit_save_clicked();
     void initTable();
     void on_pb_load_and_add_file_clicked();
+
+    void formsSetEnabled(const bool &value = true);
+    void on_pb_edit_clicked();
 };
 
 #endif // FMADDSPELLS_H

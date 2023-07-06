@@ -113,6 +113,20 @@ void Person::addSpell(Spell *spell)
     _spells.append(newSpell);
 }
 
+void Person::editSpell(Spell *spell)
+{
+    Spell * editedSpell = new Spell(*spell);
+    for(uint i = 0; i < _spells.count(); ++i)
+    {
+        if(_spells.at(i)->ID() == editedSpell->ID())
+        {
+            _spells.replace(i, editedSpell);
+            return;
+        }
+    }
+    delete editedSpell;
+}
+
 void Person::removeSpellAt(quint16 index)
 {
     if( index < _spells.count() )

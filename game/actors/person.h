@@ -50,6 +50,7 @@ public:
     QVector<Spell *> getSpells() ;
     void setSpells(QVector<Spell *> value);
     void addSpell(Spell * spell);
+    void editSpell(Spell * spell);
     void removeSpellAt(quint16 index);
 
 

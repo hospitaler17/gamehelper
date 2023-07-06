@@ -32,6 +32,7 @@ void FmAddSpells::initParams()
     connect(ui->tableView,  SIGNAL(clicked(QModelIndex)),
             this,           SLOT(slotPrintCurrentSpellOnForm(QModelIndex)));
 
+    formsSetEnabled(false);
 }
 
 void FmAddSpells::setCurrentSpell(Spell *spell)
@@ -107,31 +108,40 @@ void FmAddSpells::on_pb_remove_clicked()
     }
 }
 
-
 void FmAddSpells::on_pb_cancel_clicked()
 {
     clearFieldsOnForm();
 }
 
-
 void FmAddSpells::on_pb_add_clicked()
 {
     clearFieldsOnForm();
     ui->tableView->clearSelection();
+    formsSetEnabled(true);
+    _workMode = MODE_CREATE;
 }
-
 
 void FmAddSpells::on_pb_edit_save_clicked()
 {
     if( !checkEmptyFieldsOnForm() )
         return;
-    _currentSpell = new Spell();
-    // добавим спелл к персонажу
-    _currentSpell->setDescription(ui->pte_description->toPlainText());
-    _currentSpell->setCooldawn(ui->sb_cooldawn->value());
-    _currentSpell->setName(ui->le_name->text());
-    _person->addSpell(_currentSpell);
 
+    if(_workMode == MODE_CREATE)
+    {
+        _currentSpell = new Spell();
+        // добавим спелл к персонажу
+        _currentSpell->setDescription(ui->pte_description->toPlainText());
+        _currentSpell->setCooldawn(ui->sb_cooldawn->value());
+        _currentSpell->setName(ui->le_name->text());
+        _person->addSpell(_currentSpell);
+    }
+    else if (_workMode == MODE_EDIT)
+    {
+        _currentSpell->setDescription(ui->pte_description->toPlainText());
+        _currentSpell->setCooldawn(ui->sb_cooldawn->value());
+        _currentSpell->setName(ui->le_name->text());
+        _person->editSpell(_currentSpell);
+    }
     // добавим спелл к таблице
     initTable();
 }
@@ -193,5 +203,21 @@ void FmAddSpells::on_pb_load_and_add_file_clicked()
         _person->addSpell(_currentSpell);
         initTable();
     }
+}
+
+void FmAddSpells::formsSetEnabled(const bool &value)
+{
+    ui->le_name->setEnabled(value);
+    ui->pte_description->setEnabled(value);
+    ui->sb_cooldawn->setEnabled(value);
+
+    value? ui->frame_currentEdit->show(): ui->frame_currentEdit->hide();
+}
+
+
+void FmAddSpells::on_pb_edit_clicked()
+{
+    formsSetEnabled(true);
+    _workMode = MODE_EDIT;
 }
 
