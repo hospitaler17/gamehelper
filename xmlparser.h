@@ -50,7 +50,9 @@ private:
 
     QDir _savePath;
 
-    bool findSpellByID(Spell *spell);
+    template<typename T>
+    bool findXMLByID(T * object);
+
     QString makeFullPathToFile(QString fn, OBJECT_XML_TYPE oxt = OXT_UNDEFINED);
 signals:
 
